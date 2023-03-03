@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.trivia.runner
 
 import com.adaptionsoft.games.uglytrivia.Game
+import com.adaptionsoft.games.uglytrivia.console.SystemConsole
 import java.util.*
 
 object GameRunner {
