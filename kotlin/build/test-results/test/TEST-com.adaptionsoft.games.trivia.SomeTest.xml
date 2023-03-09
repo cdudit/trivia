@@ -1,288 +1,301 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.adaptionsoft.games.trivia.SomeTest" tests="4" skipped="0" failures="2" errors="0" timestamp="2023-03-03T15:29:50" hostname="MacBook-Pro-de-Clement.local" time="0.024">
+<testsuite name="com.adaptionsoft.games.trivia.SomeTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-03-09T10:07:04" hostname="MacBook-Pro-de-Clement.local" time="0.025">
   <properties/>
-  <testcase name="true_is_true()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.008">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
-	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:35)
-	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:162)
-	at com.adaptionsoft.games.trivia.SomeTest.true_is_true(SomeTest.kt:32)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:248)
-	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$5(DefaultLauncher.java:211)
-	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:226)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:199)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:132)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at com.sun.proxy.$Proxy2.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:133)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:832)
-</failure>
-  </testcase>
-  <testcase name="game should run if player are 2 or more and 6 or less()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.011"/>
-  <testcase name="golden master()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.004">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;joueur1 was addedThey are player number 1joueur2 was addedThey are player number 2joueur1 is the current playerThey have rolled a 5joueur1's new location is 5The category is ScienceScience Question 0Answer was corrent!!!!joueur1 now has 1 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 5The category is ScienceScience Question 1Answer was corrent!!!!joueur2 now has 1 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 10The category is SportsSports Question 0Answer was corrent!!!!joueur1 now has 2 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 10The category is SportsSports Question 1Answer was corrent!!!!joueur2 now has 2 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 3The category is RockRock Question 0Answer was corrent!!!!joueur1 now has 3 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 3The category is RockRock Question 1Answer was corrent!!!!joueur2 now has 3 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 8The category is PopPop Question 0Answer was corrent!!!!joueur1 now has 4 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 8The category is PopPop Question 1Answer was corrent!!!!joueur2 now has 4 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 1The category is ScienceScience Question 2Answer was corrent!!!!joueur1 now has 5 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 1The category is ScienceScience Question 3Answer was corrent!!!!joueur2 now has 5 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 6The category is SportsSports Question 2Answer was corrent!!!!joueur1 now has 6 Gold Coins.&gt; but was: &lt;joueur1 was addedThey are player number 1joueur2 was addedThey are player number 2joueur1 is the current playerThey have rolled a 5joueur1's new location is 5The category is SCIENCEScience Question 0Answer was corrent!!!!joueur1 now has 1 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 5The category is SCIENCEScience Question 1Answer was corrent!!!!joueur2 now has 1 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 10The category is SPORTSports Question 0Answer was corrent!!!!joueur1 now has 2 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 10The category is SPORTSports Question 1Answer was corrent!!!!joueur2 now has 2 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 3The category is ROCKRock Question 0Answer was corrent!!!!joueur1 now has 3 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 3The category is ROCKRock Question 1Answer was corrent!!!!joueur2 now has 3 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 8The category is POPPop Question 0Answer was corrent!!!!joueur1 now has 4 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 8The category is POPPop Question 1Answer was corrent!!!!joueur2 now has 4 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 1The category is SCIENCEScience Question 2Answer was corrent!!!!joueur1 now has 5 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 1The category is SCIENCEScience Question 3Answer was corrent!!!!joueur2 now has 5 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 6The category is SPORTSports Question 2Answer was corrent!!!!joueur1 now has 6 Gold Coins.&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;joueur1 was addedThey are player number 1joueur2 was addedThey are player number 2joueur1 is the current playerThey have rolled a 5joueur1's new location is 5The category is ScienceScience Question 0Answer was corrent!!!!joueur1 now has 1 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 5The category is ScienceScience Question 1Answer was corrent!!!!joueur2 now has 1 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 10The category is SportsSports Question 0Answer was corrent!!!!joueur1 now has 2 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 10The category is SportsSports Question 1Answer was corrent!!!!joueur2 now has 2 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 3The category is RockRock Question 0Answer was corrent!!!!joueur1 now has 3 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 3The category is RockRock Question 1Answer was corrent!!!!joueur2 now has 3 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 8The category is PopPop Question 0Answer was corrent!!!!joueur1 now has 4 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 8The category is PopPop Question 1Answer was corrent!!!!joueur2 now has 4 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 1The category is ScienceScience Question 2Answer was corrent!!!!joueur1 now has 5 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 1The category is ScienceScience Question 3Answer was corrent!!!!joueur2 now has 5 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 6The category is SportsSports Question 2Answer was corrent!!!!joueur1 now has 6 Gold Coins.&gt; but was: &lt;joueur1 was addedThey are player number 1joueur2 was addedThey are player number 2joueur1 is the current playerThey have rolled a 5joueur1's new location is 5The category is SCIENCEScience Question 0Answer was corrent!!!!joueur1 now has 1 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 5The category is SCIENCEScience Question 1Answer was corrent!!!!joueur2 now has 1 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 10The category is SPORTSports Question 0Answer was corrent!!!!joueur1 now has 2 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 10The category is SPORTSports Question 1Answer was corrent!!!!joueur2 now has 2 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 3The category is ROCKRock Question 0Answer was corrent!!!!joueur1 now has 3 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 3The category is ROCKRock Question 1Answer was corrent!!!!joueur2 now has 3 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 8The category is POPPop Question 0Answer was corrent!!!!joueur1 now has 4 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 8The category is POPPop Question 1Answer was corrent!!!!joueur2 now has 4 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 1The category is SCIENCEScience Question 2Answer was corrent!!!!joueur1 now has 5 Gold Coins.joueur2 is the current playerThey have rolled a 5joueur2's new location is 1The category is SCIENCEScience Question 3Answer was corrent!!!!joueur2 now has 5 Gold Coins.joueur1 is the current playerThey have rolled a 5joueur1's new location is 6The category is SPORTSports Question 2Answer was corrent!!!!joueur1 now has 6 Gold Coins.&gt;
-	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
-	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
-	at com.adaptionsoft.games.trivia.SomeTest.golden master(SomeTest.kt:58)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:248)
-	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$5(DefaultLauncher.java:211)
-	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:226)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:199)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:132)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at com.sun.proxy.$Proxy2.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.stop(TestWorker.java:133)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:832)
-</failure>
-  </testcase>
-  <testcase name="game should not run if player are less than 2()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="golden master should replace rock by techno()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.018"/>
+  <testcase name="game should run if player are 2 or more and 6 or less()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.004"/>
+  <testcase name="golden master()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="game should not run if player are more than 6()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="game should not run if player are less than 2()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
   <system-out><![CDATA[Gatien was added
 They are player number 1
-Antoine was added
+Gatien was added
 They are player number 2
-joueur1 was added
-They are player number 1
-joueur2 was added
-They are player number 2
-joueur1 is the current player
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 5
+Gatien's new location is 5
 The category is SCIENCE
 Science Question 0
 Answer was corrent!!!!
-joueur1 now has 1 Gold Coins.
-joueur2 is the current player
+Gatien now has 1 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur2's new location is 5
+Gatien's new location is 5
 The category is SCIENCE
 Science Question 1
 Answer was corrent!!!!
-joueur2 now has 1 Gold Coins.
-joueur1 is the current player
+Gatien now has 1 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 10
+Gatien's new location is 10
 The category is SPORT
 Sports Question 0
 Answer was corrent!!!!
-joueur1 now has 2 Gold Coins.
-joueur2 is the current player
+Gatien now has 2 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur2's new location is 10
+Gatien's new location is 10
 The category is SPORT
 Sports Question 1
 Answer was corrent!!!!
-joueur2 now has 2 Gold Coins.
-joueur1 is the current player
+Gatien now has 2 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 3
-The category is ROCK
-Rock Question 0
+Gatien's new location is 3
+The category is TECHNO
+Techno Question 0
 Answer was corrent!!!!
-joueur1 now has 3 Gold Coins.
-joueur2 is the current player
+Gatien now has 3 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur2's new location is 3
-The category is ROCK
-Rock Question 1
+Gatien's new location is 3
+The category is TECHNO
+Techno Question 1
 Answer was corrent!!!!
-joueur2 now has 3 Gold Coins.
-joueur1 is the current player
+Gatien now has 3 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 8
+Gatien's new location is 8
 The category is POP
 Pop Question 0
 Answer was corrent!!!!
-joueur1 now has 4 Gold Coins.
-joueur2 is the current player
+Gatien now has 4 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur2's new location is 8
+Gatien's new location is 8
 The category is POP
 Pop Question 1
 Answer was corrent!!!!
-joueur2 now has 4 Gold Coins.
-joueur1 is the current player
+Gatien now has 4 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 1
+Gatien's new location is 1
 The category is SCIENCE
 Science Question 2
 Answer was corrent!!!!
-joueur1 now has 5 Gold Coins.
-joueur2 is the current player
+Gatien now has 5 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur2's new location is 1
+Gatien's new location is 1
 The category is SCIENCE
 Science Question 3
 Answer was corrent!!!!
-joueur2 now has 5 Gold Coins.
-joueur1 is the current player
+Gatien now has 5 Gold Coins.
+Gatien is the current player
 They have rolled a 5
-joueur1's new location is 6
+Gatien's new location is 6
 The category is SPORT
 Sports Question 2
 Answer was corrent!!!!
-joueur1 now has 6 Gold Coins.
+Gatien now has 6 Gold Coins.
+Gatien was added
+They are player number 1
+Gatien was added
+They are player number 2
+Gatien was added
+They are player number 3
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 0
+Answer was corrent!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 1
+Answer was corrent!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 2
+Answer was corrent!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 10
+The category is SPORT
+Sports Question 0
+Answer was corrent!!!!
+Gatien now has 2 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 10
+The category is SPORT
+Sports Question 1
+Answer was corrent!!!!
+Gatien now has 2 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 10
+The category is SPORT
+Sports Question 2
+Answer was corrent!!!!
+Gatien now has 2 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 3
+The category is ROCK
+Rock Question 0
+Answer was corrent!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 3
+The category is ROCK
+Rock Question 1
+Answer was corrent!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 3
+The category is ROCK
+Rock Question 2
+Answer was corrent!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 0
+Answer was corrent!!!!
+Gatien now has 4 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 1
+Answer was corrent!!!!
+Gatien now has 4 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 2
+Answer was corrent!!!!
+Gatien now has 4 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 3
+Answer was corrent!!!!
+Gatien now has 5 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 4
+Answer was corrent!!!!
+Gatien now has 5 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 5
+Answer was corrent!!!!
+Gatien now has 5 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 6
+The category is SPORT
+Sports Question 3
+Answer was corrent!!!!
+Gatien now has 6 Gold Coins.
+Gatien was added
+They are player number 1
+Gatien was added
+They are player number 2
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 0
+Answer was corrent!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 1
+Answer was corrent!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 10
+The category is SPORT
+Sports Question 0
+Answer was corrent!!!!
+Gatien now has 2 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 10
+The category is SPORT
+Sports Question 1
+Answer was corrent!!!!
+Gatien now has 2 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 3
+The category is ROCK
+Rock Question 0
+Answer was corrent!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 3
+The category is ROCK
+Rock Question 1
+Answer was corrent!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 0
+Answer was corrent!!!!
+Gatien now has 4 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 1
+Answer was corrent!!!!
+Gatien now has 4 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 2
+Answer was corrent!!!!
+Gatien now has 5 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 3
+Answer was corrent!!!!
+Gatien now has 5 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 6
+The category is SPORT
+Sports Question 2
+Answer was corrent!!!!
+Gatien now has 6 Gold Coins.
+Gatien was added
+They are player number 1
+Gatien was added
+They are player number 2
+Gatien was added
+They are player number 3
+Gatien was added
+They are player number 4
+Gatien was added
+They are player number 5
 Gatien was added
 They are player number 1
 ]]></system-out>

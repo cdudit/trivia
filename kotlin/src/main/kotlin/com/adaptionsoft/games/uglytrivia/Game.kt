@@ -8,58 +8,56 @@ class Game(
     private val console: IConsole = SystemConsole(),
     private val shouldReplaceRockByTechno: Boolean = false
 ) {
-    internal var players = ArrayList<Any>()
-    internal var places = IntArray(6)
-    internal var purses = IntArray(6)
-    internal var inPenaltyBox = BooleanArray(6)
+    private var players = ArrayList<Any>()
+    private var places = IntArray(6)
+    private var purses = IntArray(6)
+    private var inPenaltyBox = BooleanArray(6)
 
-    internal var popQuestions = LinkedList<Any>()
-    internal var scienceQuestions = LinkedList<Any>()
-    internal var sportsQuestions = LinkedList<Any>()
-    internal var rockQuestions = LinkedList<Any>()
+    private var popQuestions = LinkedList<Any>()
+    private var scienceQuestions = LinkedList<Any>()
+    private var sportsQuestions = LinkedList<Any>()
+    private var rockQuestions = LinkedList<Any>()
+    private var technoQuestions = LinkedList<Any>()
 
-    internal var currentPlayer = 0
-    internal var isGettingOutOfPenaltyBox: Boolean = false
+    private var currentPlayer = 0
+    private var isGettingOutOfPenaltyBox: Boolean = false
 
     enum class CAT {
-        POP, SCIENCE, SPORT, ROCK
+        POP, SCIENCE, SPORT, ROCK, TECHNO
     }
 
     init {
         for (i in 0..49) {
-            popQuestions.addLast("Pop Question " + i)
-            scienceQuestions.addLast("Science Question " + i)
-            sportsQuestions.addLast("Sports Question " + i)
-            rockQuestions.addLast(createRockQuestion(i))
+            popQuestions.addLast("Pop Question $i")
+            scienceQuestions.addLast("Science Question $i")
+            sportsQuestions.addLast("Sports Question $i")
+            if (shouldReplaceRockByTechno) {
+                technoQuestions.addLast("Techno Question $i")
+            } else {
+                rockQuestions.addLast("Rock Question $i")
+            }
         }
     }
 
-    fun createRockQuestion(index: Int): String {
-        return "Rock Question " + index
-    }
-
     fun add(playerName: String): Boolean {
+        try {
+            players.add(playerName)
+            places[howManyPlayers()] = 0
+            purses[howManyPlayers()] = 0
+            inPenaltyBox[howManyPlayers()] = false
+        } catch (err: IndexOutOfBoundsException) {
+            throw PlayersNumberError()
+        }
 
-
-        players.add(playerName)
-        places[howManyPlayers()] = 0
-        purses[howManyPlayers()] = 0
-        inPenaltyBox[howManyPlayers()] = false
-
-        console.println(playerName + " was added")
+        console.println("$playerName was added")
         console.println("They are player number " + players.size)
         return true
     }
 
-    fun howManyPlayers(): Int {
-        return players.size
-    }
-
-    fun isPlayable(): Boolean = (players.count() in 2..6)
-
     fun roll(roll: Int) {
+        if (!isPlayable()) throw PlayersNumberError()
         console.println(players[currentPlayer].toString() + " is the current player")
-        console.println("They have rolled a " + roll)
+        console.println("They have rolled a $roll")
 
         if (inPenaltyBox[currentPlayer]) {
             if (roll % 2 != 0) {
@@ -78,9 +76,7 @@ class Game(
                 console.println(players[currentPlayer].toString() + " is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
-
         } else {
-
             places[currentPlayer] = places[currentPlayer] + roll
             if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 
@@ -91,30 +87,6 @@ class Game(
             askQuestion()
         }
 
-    }
-
-    private fun askQuestion() {
-        if (currentCategory() === CAT.POP)
-            console.println(popQuestions.removeFirst().toString())
-        if (currentCategory() === CAT.SCIENCE)
-            console.println(scienceQuestions.removeFirst().toString())
-        if (currentCategory() === CAT.SPORT)
-            console.println(sportsQuestions.removeFirst().toString())
-        if (currentCategory() === CAT.ROCK)
-            console.println(rockQuestions.removeFirst().toString())
-    }
-
-    private fun currentCategory(): CAT {
-        if (places[currentPlayer] == 0) return CAT.POP
-        if (places[currentPlayer] == 4) return CAT.POP
-        if (places[currentPlayer] == 8) return CAT.POP
-        if (places[currentPlayer] == 1) return CAT.SCIENCE
-        if (places[currentPlayer] == 5) return CAT.SCIENCE
-        if (places[currentPlayer] == 9) return CAT.SCIENCE
-        if (places[currentPlayer] == 2) return CAT.SPORT
-        if (places[currentPlayer] == 6) return CAT.SPORT
-        if (places[currentPlayer] == 10) return CAT.SPORT
-        return CAT.ROCK
     }
 
     fun wasCorrectlyAnswered(): Boolean {
@@ -137,10 +109,7 @@ class Game(
                 if (currentPlayer == players.size) currentPlayer = 0
                 return true
             }
-
-
         } else {
-
             console.println("Answer was corrent!!!!")
             purses[currentPlayer]++
             console.println(players[currentPlayer].toString()
@@ -166,15 +135,28 @@ class Game(
         return true
     }
 
-    private fun didPlayerWin(): Boolean {
-        return purses[currentPlayer] != 6
+    private fun askQuestion() {
+        when (currentCategory()) {
+            CAT.POP -> console.println(popQuestions.removeFirst().toString())
+            CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
+            CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
+            CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
+            CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+        }
     }
 
-    fun getPlayers(players: List<Player>): Int{
-        return players.count()
+    private fun currentCategory(): CAT {
+        return when (places[currentPlayer]) {
+            0, 4, 8 -> CAT.POP
+            1, 5, 9 -> CAT.SCIENCE
+            2, 6, 10 -> CAT.SPORT
+            else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+        }
     }
 
-    fun isPlayable(playersCount: Int): Boolean{
-        return playersCount in 2 .. 6
-    }
+    private fun howManyPlayers(): Int = players.size
+
+    private fun isPlayable(): Boolean = (players.count() in 2..6)
+
+    private fun didPlayerWin(): Boolean = purses[currentPlayer] != 6
 }
