@@ -2,11 +2,14 @@ package com.adaptionsoft.games.uglytrivia
 
 import com.adaptionsoft.games.uglytrivia.console.IConsole
 import com.adaptionsoft.games.uglytrivia.console.SystemConsole
+import com.adaptionsoft.games.uglytrivia.errors.MinimalGoldRequiredNotEnoughError
+import com.adaptionsoft.games.uglytrivia.errors.PlayersNumberError
 import java.util.*
 
 class Game(
     private val console: IConsole = SystemConsole(),
-    private val shouldReplaceRockByTechno: Boolean = false
+    private val shouldReplaceRockByTechno: Boolean = false,
+    private val minimalGoldRequired: Int = 6
 ) {
     private var players = ArrayList<Any>()
     private var places = IntArray(6)
@@ -55,7 +58,7 @@ class Game(
     }
 
     fun roll(roll: Int) {
-        if (!isPlayable()) throw PlayersNumberError()
+        throwIfNotPlayable()
         console.println(players[currentPlayer].toString() + " is the current player")
         console.println("They have rolled a $roll")
 
@@ -63,6 +66,7 @@ class Game(
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
+                inPenaltyBox[currentPlayer] = false
                 console.println(players[currentPlayer].toString() + " is getting out of the penalty box")
                 places[currentPlayer] = places[currentPlayer] + roll
                 if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
@@ -99,7 +103,7 @@ class Game(
                         + purses[currentPlayer]
                         + " Gold Coins.")
 
-                val winner = didPlayerWin()
+                val winner = didPlayerNotWin()
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
 
@@ -117,7 +121,7 @@ class Game(
                     + purses[currentPlayer]
                     + " Gold Coins.")
 
-            val winner = didPlayerWin()
+            val winner = didPlayerNotWin()
             currentPlayer++
             if (currentPlayer == players.size) currentPlayer = 0
 
@@ -156,7 +160,10 @@ class Game(
 
     private fun howManyPlayers(): Int = players.size
 
-    private fun isPlayable(): Boolean = (players.count() in 2..6)
+    private fun throwIfNotPlayable() {
+        if (players.size !in 2..6) throw PlayersNumberError()
+        if (minimalGoldRequired < 6) throw MinimalGoldRequiredNotEnoughError()
+    }
 
-    private fun didPlayerWin(): Boolean = purses[currentPlayer] != 6
+    private fun didPlayerNotWin(): Boolean = purses[currentPlayer] < minimalGoldRequired
 }

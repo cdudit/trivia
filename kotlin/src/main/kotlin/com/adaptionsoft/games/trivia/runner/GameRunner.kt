@@ -5,7 +5,36 @@ import com.adaptionsoft.games.uglytrivia.console.SystemConsole
 import java.util.*
 
 object GameRunner {
-    var notAWinner: Boolean = false
+    private var notAWinner: Boolean = false
+
+    fun runGame(
+        game: Game,
+        shouldUseRandom: Boolean = true,
+        firstRoll: Int = -1,
+        secondRoll: Int = -1
+    ) {
+        var counter = 0
+        val rand = Random()
+
+        do {
+            if (shouldUseRandom) {
+                game.roll(rand.nextInt(5) + 1)
+                notAWinner = if (rand.nextInt(9) == 7) {
+                    game.wrongAnswer()
+                } else {
+                    game.wasCorrectlyAnswered()
+                }
+            } else {
+                game.roll(firstRoll)
+                notAWinner = if (secondRoll == 7) {
+                    game.wrongAnswer()
+                } else {
+                    game.wasCorrectlyAnswered()
+                }
+                counter++
+            }
+        } while (notAWinner && counter < 50)
+    }
 }
 
 fun main(args: Array<String>) {
@@ -15,19 +44,5 @@ fun main(args: Array<String>) {
     aGame.add("Pat")
     aGame.add("Sue")
 
-    val rand = Random()
-
-    do {
-
-        aGame.roll(rand.nextInt(5) + 1)
-
-        if (rand.nextInt(9) == 7) {
-            GameRunner.notAWinner = aGame.wrongAnswer()
-        } else {
-            GameRunner.notAWinner = aGame.wasCorrectlyAnswered()
-        }
-
-
-    } while (GameRunner.notAWinner)
-
+    GameRunner.runGame(aGame)
 }
