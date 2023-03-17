@@ -5,6 +5,7 @@ import com.adaptionsoft.games.uglytrivia.console.SystemConsole
 import com.adaptionsoft.games.uglytrivia.errors.MinimalGoldRequiredNotEnoughError
 import com.adaptionsoft.games.uglytrivia.errors.PlayersNumberError
 import java.util.*
+import kotlin.NoSuchElementException
 
 class Game(
     private val console: IConsole = SystemConsole(),
@@ -25,21 +26,14 @@ class Game(
     private var currentPlayer = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
 
+    private var numberOfQuestions = 0
+
     enum class CAT {
         POP, SCIENCE, SPORT, ROCK, TECHNO
     }
 
     init {
-        for (i in 0..49) {
-            popQuestions.addLast("Pop Question $i")
-            scienceQuestions.addLast("Science Question $i")
-            sportsQuestions.addLast("Sports Question $i")
-            if (shouldReplaceRockByTechno) {
-                technoQuestions.addLast("Techno Question $i")
-            } else {
-                rockQuestions.addLast("Rock Question $i")
-            }
-        }
+        fillQuestions()
     }
 
     fun add(playerName: String): Boolean {
@@ -140,12 +134,17 @@ class Game(
     }
 
     private fun askQuestion() {
-        when (currentCategory()) {
-            CAT.POP -> console.println(popQuestions.removeFirst().toString())
-            CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
-            CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
-            CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
-            CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+        try {
+            when (currentCategory()) {
+                CAT.POP -> console.println(popQuestions.removeFirst().toString())
+                CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
+                CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
+                CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
+                CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+            }
+        } catch (exception: NoSuchElementException) {
+            fillQuestions()
+            askQuestion()
         }
     }
 
@@ -166,4 +165,18 @@ class Game(
     }
 
     private fun didPlayerNotWin(): Boolean = purses[currentPlayer] < minimalGoldRequired
+
+    private fun fillQuestions() {
+        for (i in numberOfQuestions..numberOfQuestions + 49) {
+            popQuestions.addLast("Pop Question $i")
+            scienceQuestions.addLast("Science Question $i")
+            sportsQuestions.addLast("Sports Question $i")
+            if (shouldReplaceRockByTechno) {
+                technoQuestions.addLast("Techno Question $i")
+            } else {
+                rockQuestions.addLast("Rock Question $i")
+            }
+        }
+        numberOfQuestions += 49
+    }
 }

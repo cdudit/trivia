@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import kotlin.random.Random
 
 class SomeTest {
     // With playGame(console, 5, 5, false, listOf("players1", "players2"))
@@ -64,13 +65,25 @@ class SomeTest {
 
     //region FEATURE REPLACE ROCK BY TECHNO
     @Test
+    fun `without replacing category is rock and not techno`() {
+        val console = SpyConsole()
+        val players = listOf("Gatien", "Gatien")
+        val game = Game(console).apply {
+            players.forEach { add(it) }
+        }
+        GameRunner.runGame(game)
+        assert(console.getContent().contains("The category is ROCK"))
+        assert(!console.getContent().contains("The category is TECHNO"))
+    }
+
+    @Test
     fun `should replace rock by techno`() {
         val console = SpyConsole()
         val players = listOf("Gatien", "Gatien")
         val game = Game(console, shouldReplaceRockByTechno = true).apply {
             players.forEach { add(it) }
         }
-        GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
+        GameRunner.runGame(game)
         assert(console.getContent().contains("The category is TECHNO"))
         assert(!console.getContent().contains("The category is ROCK"))
     }
@@ -80,7 +93,7 @@ class SomeTest {
     @Test
     fun `game with less than 6 gold should throw`() {
         val players = listOf("Gatien", "Gatien")
-        val game = Game(minimalGoldRequired = 3).apply {
+        val game = Game(minimalGoldRequired = 5).apply {
             players.forEach { add(it) }
         }
         assertThrows<MinimalGoldRequiredNotEnoughError> {
@@ -107,6 +120,27 @@ class SomeTest {
         }
         assertDoesNotThrow {
             GameRunner.runGame(game)
+        }
+    }
+    //endregion
+
+    //region INFINITE QUESTIONS
+    @Test
+    fun `number of questions should be infinite`() {
+        val game = Game().apply {
+            add("Gatien")
+            add("Gatien")
+        }
+        val random = Random.nextInt(500, 2000)
+        println("\nNumber of roll: $random\n")
+        assertDoesNotThrow {
+            GameRunner.runGame(
+                game,
+                shouldUseRandom = false,
+                firstRoll = 2,
+                secondRoll = 7,
+                shouldStopAfterNumberOfQuestions = random
+            )
         }
     }
     //endregion

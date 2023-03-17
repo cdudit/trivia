@@ -11,7 +11,8 @@ object GameRunner {
         game: Game,
         shouldUseRandom: Boolean = true,
         firstRoll: Int = -1,
-        secondRoll: Int = -1
+        secondRoll: Int = -1,
+        shouldStopAfterNumberOfQuestions: Int = 50
     ) {
         var counter = 0
         val rand = Random()
@@ -33,7 +34,7 @@ object GameRunner {
                 }
                 counter++
             }
-        } while (notAWinner && counter < 50)
+        } while (notAWinner && counter < shouldStopAfterNumberOfQuestions)
     }
 }
 
