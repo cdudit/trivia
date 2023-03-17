@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.trivia.runner
 
 import com.adaptionsoft.games.uglytrivia.Game
+import com.adaptionsoft.games.uglytrivia.Player
 import com.adaptionsoft.games.uglytrivia.console.SystemConsole
 import java.util.*
 
@@ -39,11 +40,11 @@ object GameRunner {
 }
 
 fun main(args: Array<String>) {
-    val aGame = Game()
-
-    aGame.add("Chet")
-    aGame.add("Pat")
-    aGame.add("Sue")
-
-    GameRunner.runGame(aGame)
+    val game = Game()
+    game.add(arrayListOf(
+        Player("Chet"),
+        Player("Pat"),
+        Player("Sue"),
+    ))
+    GameRunner.runGame(game)
 }

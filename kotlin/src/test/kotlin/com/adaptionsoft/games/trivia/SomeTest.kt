@@ -2,6 +2,7 @@ package com.adaptionsoft.games.trivia
 
 import com.adaptionsoft.games.trivia.runner.GameRunner
 import com.adaptionsoft.games.uglytrivia.Game
+import com.adaptionsoft.games.uglytrivia.Player
 import com.adaptionsoft.games.uglytrivia.errors.PlayersNumberError
 import com.adaptionsoft.games.uglytrivia.console.SpyConsole
 import com.adaptionsoft.games.uglytrivia.errors.MinimalGoldRequiredNotEnoughError
@@ -19,9 +20,8 @@ class SomeTest {
     @Test
     fun `golden master`() {
         val console = SpyConsole()
-        val players = listOf("Gatien", "Gatien")
         val game = Game(console).apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         GameRunner.runGame(game, false, 5, 5)
         assertEquals(firstGoldenMaster, console.getContent())
@@ -31,9 +31,8 @@ class SomeTest {
     //region PLAYERS NUMBER
     @Test
     fun `game should run if player are 2 or more and 6 or less`() {
-        val players = listOf("Gatien", "Gatien")
         val game = Game().apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         assertDoesNotThrow {
             GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
@@ -42,10 +41,9 @@ class SomeTest {
 
     @Test
     fun `game should not run if player are less than 2`() {
-        val players = listOf("Gatien")
         assertThrows<PlayersNumberError> {
             val game = Game().apply {
-                players.forEach { add(it) }
+                add(arrayListOf(Player("Gatien")))
             }
             GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
         }
@@ -53,10 +51,9 @@ class SomeTest {
 
     @Test
     fun `game should not run if player are more than 6`() {
-        val players = listOf("Gatien", "Gatien", "Gatien", "Gatien", "Gatien", "Gatien", "Gatien")
         assertThrows<PlayersNumberError> {
             val game = Game().apply {
-                players.forEach { add(it) }
+                add(arrayListOf(Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien")))
             }
             GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
         }
@@ -67,9 +64,8 @@ class SomeTest {
     @Test
     fun `without replacing category is rock and not techno`() {
         val console = SpyConsole()
-        val players = listOf("Gatien", "Gatien")
         val game = Game(console).apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         GameRunner.runGame(game)
         assert(console.getContent().contains("The category is ROCK"))
@@ -79,9 +75,8 @@ class SomeTest {
     @Test
     fun `should replace rock by techno`() {
         val console = SpyConsole()
-        val players = listOf("Gatien", "Gatien")
         val game = Game(console, shouldReplaceRockByTechno = true).apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         GameRunner.runGame(game)
         assert(console.getContent().contains("The category is TECHNO"))
@@ -92,20 +87,18 @@ class SomeTest {
     //region MINIMAL GOLD REQUIRED
     @Test
     fun `game with less than 6 gold should throw`() {
-        val players = listOf("Gatien", "Gatien")
-        val game = Game(minimalGoldRequired = 5).apply {
-            players.forEach { add(it) }
-        }
         assertThrows<MinimalGoldRequiredNotEnoughError> {
+            val game = Game(minimalGoldRequired = 5).apply {
+                add(arrayListOf(Player("Gatien"), Player("Gatien")))
+            }
             GameRunner.runGame(game)
         }
     }
 
     @Test
     fun `game with 6 gold should not throw`() {
-        val players = listOf("Gatien", "Gatien")
         val game = Game(minimalGoldRequired = 6).apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         assertDoesNotThrow {
             GameRunner.runGame(game)
@@ -114,9 +107,8 @@ class SomeTest {
 
     @Test
     fun `game more than 6 gold should not throw`() {
-        val players = listOf("Gatien", "Gatien")
         val game = Game(minimalGoldRequired = 40).apply {
-            players.forEach { add(it) }
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         assertDoesNotThrow {
             GameRunner.runGame(game)
@@ -128,8 +120,7 @@ class SomeTest {
     @Test
     fun `number of questions should be infinite`() {
         val game = Game().apply {
-            add("Gatien")
-            add("Gatien")
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         val random = Random.nextInt(500, 2000)
         println("\nNumber of roll: $random\n")
@@ -150,7 +141,7 @@ class SomeTest {
     fun `should stay in prison`() {
         val console = SpyConsole()
         val game = Game(console).apply {
-            listOf("Arthur", "Gatien").forEach { add(it) }
+            add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
         GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 2, secondRoll = 7)
         assertEquals(false, console.getContent().contains("Arthur is getting out of the penalty box"))
@@ -161,7 +152,7 @@ class SomeTest {
     fun `should quit prison`() {
         val console = SpyConsole()
         val game = Game(console).apply {
-            listOf("Arthur", "Gatien").forEach { add(it) }
+            add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
         GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
         assert(console.getContent().contains("Arthur is getting out of the penalty box"))
