@@ -208,4 +208,38 @@ class SomeTest {
         }
     }
     //endregion
+
+    //region EXPANSION PACK
+    @Test
+    fun `when NOT using expansion pack, specific categories MUST NOT be played`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
+        }
+        GameRunner.runGame(game)
+        assert(!console.getContent().contains("The category is RAP"))
+        assert(!console.getContent().contains("The category is PHILO"))
+        assert(!console.getContent().contains("The category is LITTERATURE"))
+        assert(!console.getContent().contains("The category is GEO"))
+    }
+
+    @Test
+    fun `when using expansion pack, specific categories must be played`() {
+        val console = SpyConsole()
+        val game = Game(console, shouldUseExpansionPack = true).apply {
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
+        }
+        GameRunner.runGame(
+            game,
+            shouldUseRandom = false,
+            firstRoll = 7,
+            secondRoll = 7,
+            shouldStopAfterNumberOfQuestions = 2000
+        )
+        assert(console.getContent().contains("The category is RAP"))
+        assert(console.getContent().contains("The category is PHILO"))
+        assert(console.getContent().contains("The category is LITTERATURE"))
+        assert(console.getContent().contains("The category is GEO"))
+    }
+    //endregion
 }

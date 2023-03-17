@@ -18,11 +18,15 @@ class Game(
 
     private var leaderboard = Leaderboard()
 
-    private var popQuestions = LinkedList<Any>()
-    private var scienceQuestions = LinkedList<Any>()
-    private var sportsQuestions = LinkedList<Any>()
-    private var rockQuestions = LinkedList<Any>()
-    private var technoQuestions = LinkedList<Any>()
+    private var popQuestions = LinkedList<String>()
+    private var scienceQuestions = LinkedList<String>()
+    private var sportsQuestions = LinkedList<String>()
+    private var rockQuestions = LinkedList<String>()
+    private var technoQuestions = LinkedList<String>()
+    private var rapQuestions = LinkedList<String>()
+    private var philoQuestions = LinkedList<String>()
+    private var litteratureQuestions = LinkedList<String>()
+    private var geoQuestions = LinkedList<String>()
 
     private var currentPlayerIndex = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
@@ -30,7 +34,7 @@ class Game(
     private var numberOfQuestions = 0
 
     enum class CAT {
-        POP, SCIENCE, SPORT, ROCK, TECHNO
+        POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO
     }
 
     init {
@@ -167,6 +171,7 @@ class Game(
                     CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
                     CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
                     CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+                    else -> {}
                 }
             } catch (exception: NoSuchElementException) {
                 fillQuestions()
@@ -183,11 +188,24 @@ class Game(
     }
 
     private fun currentCategory(): CAT {
-        return when (players[currentPlayerIndex].place) {
-            0, 4, 8 -> CAT.POP
-            1, 5, 9 -> CAT.SCIENCE
-            2, 6, 10 -> CAT.SPORT
-            else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+        if (shouldUseExpansionPack) {
+            return when (players[currentPlayerIndex].place) {
+                0 -> CAT.POP
+                1 -> CAT.SCIENCE
+                2, 10 -> CAT.SPORT
+                3, 11 -> CAT.RAP
+                4, 7 -> CAT.GEO
+                8 -> CAT.PHILO
+                9 -> CAT.LITTERATURE
+                else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+            }
+        } else {
+            return when (players[currentPlayerIndex].place) {
+                0, 4, 8 -> CAT.POP
+                1, 5, 9 -> CAT.SCIENCE
+                2, 6, 10 -> CAT.SPORT
+                else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+            }
         }
     }
 
@@ -207,6 +225,12 @@ class Game(
                 technoQuestions.addLast("Techno Question $i")
             } else {
                 rockQuestions.addLast("Rock Question $i")
+            }
+            if (shouldUseExpansionPack) {
+                rapQuestions.addLast("Rap Question $i")
+                philoQuestions.addLast("Philo Question $i")
+                litteratureQuestions.addLast("Litterature Question $i")
+                geoQuestions.addLast("Geo Question $i")
             }
         }
         numberOfQuestions += 49
