@@ -4,6 +4,8 @@ import com.adaptionsoft.games.uglytrivia.console.IConsole
 import com.adaptionsoft.games.uglytrivia.console.SystemConsole
 import com.adaptionsoft.games.uglytrivia.errors.MinimalGoldRequiredNotEnoughError
 import com.adaptionsoft.games.uglytrivia.errors.PlayersNumberError
+import java.lang.StringBuilder
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.NoSuchElementException
 import kotlin.collections.ArrayList
@@ -39,6 +41,15 @@ class Game(
 
     init {
         fillQuestions()
+    }
+
+    fun getParameters(): String {
+        val builder = StringBuilder()
+        builder.append("minimalGoldRequired: $minimalGoldRequired")
+        builder.append("shouldUseExpansionPack: $shouldUseExpansionPack")
+        builder.append("shouldReplaceRockByTechno: $shouldReplaceRockByTechno")
+        builder.append("players: ${players.map { it.name }}")
+        return builder.toString()
     }
 
     fun add(newPlayers: ArrayList<Player>) {
@@ -97,9 +108,13 @@ class Game(
             players[currentPlayerIndex]
         } catch (error: IndexOutOfBoundsException) {
             incrementCurrentPlayerIndex()
+            if (players.size == 0) {
+                return false
+            }
             return true
         }
-        if (players[currentPlayerIndex].wantToUseJoker) {
+        if (players[currentPlayerIndex].hasJoker) {
+            players[currentPlayerIndex].hasJoker = false
             incrementCurrentPlayerIndex()
             return true
         }
@@ -141,10 +156,14 @@ class Game(
             // Check if player has been removed because doesn't want to answer
             players[currentPlayerIndex]
         } catch (error: IndexOutOfBoundsException) {
+            if (players.size == 0) {
+                return false
+            }
             incrementCurrentPlayerIndex()
             return true
         }
-        if (players[currentPlayerIndex].wantToUseJoker) {
+        if (players[currentPlayerIndex].hasJoker) {
+            players[currentPlayerIndex].hasJoker = false
             incrementCurrentPlayerIndex()
             return true
         }
@@ -152,13 +171,17 @@ class Game(
         console.println(players[currentPlayerIndex].name + " was sent to the penalty box")
         players[currentPlayerIndex].isInPenaltyBox = true
         players[currentPlayerIndex].timesGotInPrison++
+        if (players[currentPlayerIndex].timesGotInPrison % 3 == 0) {
+            console.println("${players[currentPlayerIndex].name} earns a joker after ${players[currentPlayerIndex].timesGotInPrison} turn in jail")
+            players[currentPlayerIndex].hasJoker = true
+        }
 
         incrementCurrentPlayerIndex()
         return true
     }
 
     private fun askQuestion() {
-        if (players[currentPlayerIndex].wantToUseJoker) {
+        if (players[currentPlayerIndex].hasJoker) {
             console.println("${players[currentPlayerIndex].name} uses his joker")
         } else if (players[currentPlayerIndex].doesNotWantToAnswer) {
             console.println("${players[currentPlayerIndex].name} doesn't want to answer and left the game")
