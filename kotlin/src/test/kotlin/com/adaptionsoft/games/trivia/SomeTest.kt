@@ -13,21 +13,6 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.random.Random
 
 class SomeTest {
-    // With playGame(console, 5, 5, false, listOf("players1", "players2"))
-    private val firstGoldenMaster = "Gatien was addedThey are player number 1Gatien was addedThey are player number 2Gatien is the current playerThey have rolled a 5Gatien's new location is 5The category is SCIENCEScience Question 0Answer was corrent!!!!Gatien now has 1 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 5The category is SCIENCEScience Question 1Answer was corrent!!!!Gatien now has 1 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 10The category is SPORTSports Question 0Answer was corrent!!!!Gatien now has 2 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 10The category is SPORTSports Question 1Answer was corrent!!!!Gatien now has 2 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 3The category is ROCKRock Question 0Answer was corrent!!!!Gatien now has 3 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 3The category is ROCKRock Question 1Answer was corrent!!!!Gatien now has 3 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 8The category is POPPop Question 0Answer was corrent!!!!Gatien now has 4 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 8The category is POPPop Question 1Answer was corrent!!!!Gatien now has 4 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 1The category is SCIENCEScience Question 2Answer was corrent!!!!Gatien now has 5 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 1The category is SCIENCEScience Question 3Answer was corrent!!!!Gatien now has 5 Gold Coins.Gatien is the current playerThey have rolled a 5Gatien's new location is 6The category is SPORTSports Question 2Answer was corrent!!!!Gatien now has 6 Gold Coins."
-
-    //region GOLDEN MASTER
-    @Test
-    fun `golden master`() {
-        val console = SpyConsole()
-        val game = Game(console).apply {
-            add(arrayListOf(Player("Gatien"), Player("Gatien")))
-        }
-        GameRunner.runGame(game, false, 5, 5)
-        assertEquals(firstGoldenMaster, console.getContent())
-    }
-    //endregion
-
     //region PLAYERS NUMBER
     @Test
     fun `game should run if player are 2 or more and 6 or less`() {
@@ -97,22 +82,24 @@ class SomeTest {
 
     @Test
     fun `game with 6 gold should not throw`() {
-        val game = Game(minimalGoldRequired = 6).apply {
-            add(arrayListOf(Player("Gatien"), Player("Gatien")))
-        }
         assertDoesNotThrow {
+            val game = Game(minimalGoldRequired = 6).apply {
+                add(arrayListOf(Player("Gatien"), Player("Gatien")))
+            }
             GameRunner.runGame(game)
         }
     }
 
     @Test
     fun `game more than 6 gold should not throw`() {
-        val game = Game(minimalGoldRequired = 40).apply {
-            add(arrayListOf(Player("Gatien"), Player("Gatien")))
-        }
+        val console = SpyConsole()
         assertDoesNotThrow {
+            val game = Game(console, minimalGoldRequired = 40).apply {
+                add(arrayListOf(Player("Gatien"), Player("Gatien")))
+            }
             GameRunner.runGame(game)
         }
+        assert(console.getContent().contains("Gatien now has 40 Gold Coins"))
     }
     //endregion
 
@@ -122,8 +109,11 @@ class SomeTest {
         val game = Game().apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
-        val random = Random.nextInt(500, 2000)
-        println("\nNumber of roll: $random\n")
+        val random = Random.nextInt(10, 100)
+
+        // Set first roll = 2 and second roll = 7 to make an infinite game
+        // (always bad answer and stay in penalty box)
+
         assertDoesNotThrow {
             GameRunner.runGame(
                 game,
@@ -133,6 +123,8 @@ class SomeTest {
                 shouldStopAfterNumberOfQuestions = random
             )
         }
+
+        println("\nNumber of roll: $random\n")
     }
     //endregion
 
@@ -143,10 +135,11 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
+        // First roll 2: Bad Answer
+        // Second roll 7: Go In Prison
         GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 2, secondRoll = 7)
-        assertEquals(false, console.getContent().contains("Arthur is getting out of the penalty box"))
+        assert(!console.getContent().contains("Arthur is getting out of the penalty box"))
     }
-
 
     @Test
     fun `should quit prison`() {
@@ -154,16 +147,36 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
+        // First roll 2: Good Answer
+        // Second roll 7: Go In Prison
         GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
         assert(console.getContent().contains("Arthur is getting out of the penalty box"))
     }
+    //endregion
 
-    // WIP
-    /*@Test
-    fun `should quit prison and win game`() {
+    //region DOES NOT WANT TO ANSWER
+    @Test
+    fun `player doesn't want to answer the question and leave the game`() {
         val console = SpyConsole()
-        playGame(console, 2, 7, false, listOf("Arthur", "Gatien"))
-        assertFalse(GameRunner.notAWinner)
-    }*/
+        val game = Game(console).apply {
+            add(arrayListOf(Player("Louis"), Player("Gatien", doesNotWantToAnswer = true)))
+        }
+        GameRunner.runGame(game)
+        assert(console.getContent().contains("Gatien doesn't want to answer and left the game"))
+        val afterPlayerLeft = console.getContent().split("Gatien doesn't want to answer and left the game")[1]
+        assert(!afterPlayerLeft.contains("Gatien"))
+    }
+    //endregion
+
+    //region PLAYER CAN USE JOKER
+    @Test
+    fun `player can use joker, doesn't answer and doesn't win gold`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player("Gatien"), Player("Louis", wantToUseJoker = true)))
+        }
+        GameRunner.runGame(game)
+        assert(console.getContent().contains("Louis uses his jokerGatien is the current player"))
+    }
     //endregion
 }

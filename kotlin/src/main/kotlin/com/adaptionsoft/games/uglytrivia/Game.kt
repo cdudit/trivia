@@ -8,14 +8,6 @@ import java.util.*
 import kotlin.NoSuchElementException
 import kotlin.collections.ArrayList
 
-data class Player(
-    val name: String,
-    var purses: Int = 0,
-    var place: Int = 0,
-    var isInPenaltyBox: Boolean = false,
-    var timesGotInPrison: Int = 0
-)
-
 class Game(
     private val console: IConsole = SystemConsole(),
     private val shouldReplaceRockByTechno: Boolean = false,
@@ -23,13 +15,15 @@ class Game(
 ) {
     private var players = arrayListOf<Player>()
 
+    private var leaderboard = Leaderboard()
+
     private var popQuestions = LinkedList<Any>()
     private var scienceQuestions = LinkedList<Any>()
     private var sportsQuestions = LinkedList<Any>()
     private var rockQuestions = LinkedList<Any>()
     private var technoQuestions = LinkedList<Any>()
 
-    private var currentPlayer = 0
+    private var currentPlayerIndex = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     private var numberOfQuestions = 0
@@ -49,38 +43,43 @@ class Game(
             console.println("They are player number ${index + 1}")
         }
         throwIfNotPlayable()
+        if (players.size == 2) {
+            leaderboard.hasThirdPlayer = true
+            leaderboard.hasSecondPlayer = true
+        } else if (players.size == 3) {
+            leaderboard.hasThirdPlayer = true
+        }
     }
 
     fun roll(roll: Int) {
-        throwIfNotPlayable()
-        console.println("${players[currentPlayer].name} is the current player")
+        console.println("${players[currentPlayerIndex].name} is the current player")
         console.println("They have rolled a $roll")
 
-        if (players[currentPlayer].isInPenaltyBox) {
+        if (players[currentPlayerIndex].isInPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
-                players[currentPlayer].isInPenaltyBox = false
-                console.println("${players[currentPlayer].name} is getting out of the penalty box")
-                players[currentPlayer].place = players[currentPlayer].place + roll
-                if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
+                players[currentPlayerIndex].isInPenaltyBox = false
+                console.println("${players[currentPlayerIndex].name} is getting out of the penalty box")
+                players[currentPlayerIndex].place = players[currentPlayerIndex].place + roll
+                if (players[currentPlayerIndex].place > 11) players[currentPlayerIndex].place = players[currentPlayerIndex].place - 12
 
-                console.println(players[currentPlayer].name
+                console.println(players[currentPlayerIndex].name
                         + "'s new location is "
-                        + players[currentPlayer].place)
+                        + players[currentPlayerIndex].place)
                 console.println("The category is " + currentCategory())
                 askQuestion()
             } else {
-                console.println("${players[currentPlayer].name} is not getting out of the penalty box")
+                console.println("${players[currentPlayerIndex].name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
         } else {
-            players[currentPlayer].place = players[currentPlayer].place + roll
-            if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
+            players[currentPlayerIndex].place = players[currentPlayerIndex].place + roll
+            if (players[currentPlayerIndex].place > 11) players[currentPlayerIndex].place = players[currentPlayerIndex].place - 12
 
-            console.println(players[currentPlayer].name
+            console.println(players[currentPlayerIndex].name
                     + "'s new location is "
-                    + players[currentPlayer].place)
+                    + players[currentPlayerIndex].place)
             console.println("The category is " + currentCategory())
             askQuestion()
         }
@@ -88,69 +87,102 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (players[currentPlayer].isInPenaltyBox) {
+        try {
+            // Check if player has been removed because doesn't want to answer
+            players[currentPlayerIndex]
+        } catch (error: IndexOutOfBoundsException) {
+            incrementCurrentPlayerIndex()
+            return true
+        }
+        if (players[currentPlayerIndex].wantToUseJoker) {
+            incrementCurrentPlayerIndex()
+            return true
+        }
+        if (players[currentPlayerIndex].isInPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 console.println("Answer was correct!!!!")
-                players[currentPlayer].purses++
-                console.println(players[currentPlayer].name
+                players[currentPlayerIndex].purses++
+                console.println(players[currentPlayerIndex].name
                         + " now has "
-                        + players[currentPlayer].purses
+                        + players[currentPlayerIndex].purses
                         + " Gold Coins.")
 
                 val winner = didPlayerNotWin()
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
+                incrementCurrentPlayerIndex()
 
                 return winner
             } else {
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
+                incrementCurrentPlayerIndex()
                 return true
             }
         } else {
             console.println("Answer was corrent!!!!")
-            players[currentPlayer].purses++
-            console.println(players[currentPlayer].name
+            players[currentPlayerIndex].purses++
+            console.println(players[currentPlayerIndex].name
                     + " now has "
-                    + players[currentPlayer].purses
+                    + players[currentPlayerIndex].purses
                     + " Gold Coins.")
 
             val winner = didPlayerNotWin()
-            currentPlayer++
-            if (currentPlayer == players.size) currentPlayer = 0
+            currentPlayerIndex++
+            if (currentPlayerIndex == players.size) currentPlayerIndex = 0
 
             return winner
         }
     }
 
     fun wrongAnswer(): Boolean {
+        try {
+            // Check if player has been removed because doesn't want to answer
+            players[currentPlayerIndex]
+        } catch (error: IndexOutOfBoundsException) {
+            incrementCurrentPlayerIndex()
+            return true
+        }
+        if (players[currentPlayerIndex].wantToUseJoker) {
+            incrementCurrentPlayerIndex()
+            return true
+        }
         console.println("Question was incorrectly answered")
-        console.println(players[currentPlayer].toString() + " was sent to the penalty box")
-        players[currentPlayer].isInPenaltyBox = true
-        players[currentPlayer].timesGotInPrison++
+        console.println(players[currentPlayerIndex].name + " was sent to the penalty box")
+        players[currentPlayerIndex].isInPenaltyBox = true
+        players[currentPlayerIndex].timesGotInPrison++
 
-        currentPlayer++
-        if (currentPlayer == players.size) currentPlayer = 0
+        incrementCurrentPlayerIndex()
         return true
     }
 
     private fun askQuestion() {
-        try {
-            when (currentCategory()) {
-                CAT.POP -> console.println(popQuestions.removeFirst().toString())
-                CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
-                CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
-                CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
-                CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+        if (players[currentPlayerIndex].wantToUseJoker) {
+            console.println("${players[currentPlayerIndex].name} uses his joker")
+        } else if (players[currentPlayerIndex].doesNotWantToAnswer) {
+            console.println("${players[currentPlayerIndex].name} doesn't want to answer and left the game")
+            players.removeAt(currentPlayerIndex)
+        } else {
+            try {
+                when (currentCategory()) {
+                    CAT.POP -> console.println(popQuestions.removeFirst().toString())
+                    CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
+                    CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
+                    CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
+                    CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+                }
+            } catch (exception: NoSuchElementException) {
+                fillQuestions()
+                askQuestion()
             }
-        } catch (exception: NoSuchElementException) {
-            fillQuestions()
-            askQuestion()
+        }
+    }
+
+    private fun incrementCurrentPlayerIndex() {
+        currentPlayerIndex++
+        if (currentPlayerIndex >= players.size) {
+            currentPlayerIndex = 0
         }
     }
 
     private fun currentCategory(): CAT {
-        return when (players[currentPlayer].place) {
+        return when (players[currentPlayerIndex].place) {
             0, 4, 8 -> CAT.POP
             1, 5, 9 -> CAT.SCIENCE
             2, 6, 10 -> CAT.SPORT
@@ -163,7 +195,7 @@ class Game(
         if (minimalGoldRequired < 6) throw MinimalGoldRequiredNotEnoughError()
     }
 
-    private fun didPlayerNotWin(): Boolean = players[currentPlayer].purses < minimalGoldRequired
+    private fun didPlayerNotWin(): Boolean = players[currentPlayerIndex].purses < minimalGoldRequired
 
     private fun fillQuestions() {
         for (i in numberOfQuestions..numberOfQuestions + 49) {
