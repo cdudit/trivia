@@ -11,7 +11,8 @@ import kotlin.collections.ArrayList
 class Game(
     private val console: IConsole = SystemConsole(),
     private val shouldReplaceRockByTechno: Boolean = false,
-    private val minimalGoldRequired: Int = 6
+    private val minimalGoldRequired: Int = 6,
+    private val shouldUseExpansionPack: Boolean = false
 ) {
     private var players = arrayListOf<Player>()
 

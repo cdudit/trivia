@@ -5,14 +5,23 @@ import com.adaptionsoft.games.uglytrivia.Game
 import com.adaptionsoft.games.uglytrivia.Player
 import com.adaptionsoft.games.uglytrivia.errors.PlayersNumberError
 import com.adaptionsoft.games.uglytrivia.console.SpyConsole
+import com.adaptionsoft.games.uglytrivia.errors.CouldNotReplayGameError
 import com.adaptionsoft.games.uglytrivia.errors.MinimalGoldRequiredNotEnoughError
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import kotlin.random.Random
 
 class SomeTest {
+    private var gameRunner = GameRunner
+
+    @BeforeEach
+    fun reset() {
+        gameRunner.reset()
+    }
+
     //region PLAYERS NUMBER
     @Test
     fun `game should run if player are 2 or more and 6 or less`() {
@@ -20,7 +29,7 @@ class SomeTest {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         assertDoesNotThrow {
-            GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
+            gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
         }
     }
 
@@ -30,7 +39,7 @@ class SomeTest {
             val game = Game().apply {
                 add(arrayListOf(Player("Gatien")))
             }
-            GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
+            gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
         }
     }
 
@@ -40,7 +49,7 @@ class SomeTest {
             val game = Game().apply {
                 add(arrayListOf(Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien"), Player("Gatien")))
             }
-            GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
+            gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 5, secondRoll = 5)
         }
     }
     //endregion
@@ -52,7 +61,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(console.getContent().contains("The category is ROCK"))
         assert(!console.getContent().contains("The category is TECHNO"))
     }
@@ -63,7 +72,7 @@ class SomeTest {
         val game = Game(console, shouldReplaceRockByTechno = true).apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(console.getContent().contains("The category is TECHNO"))
         assert(!console.getContent().contains("The category is ROCK"))
     }
@@ -76,7 +85,7 @@ class SomeTest {
             val game = Game(minimalGoldRequired = 5).apply {
                 add(arrayListOf(Player("Gatien"), Player("Gatien")))
             }
-            GameRunner.runGame(game)
+            gameRunner.runGame(game)
         }
     }
 
@@ -86,7 +95,7 @@ class SomeTest {
             val game = Game(minimalGoldRequired = 6).apply {
                 add(arrayListOf(Player("Gatien"), Player("Gatien")))
             }
-            GameRunner.runGame(game)
+            gameRunner.runGame(game)
         }
     }
 
@@ -97,7 +106,7 @@ class SomeTest {
             val game = Game(console, minimalGoldRequired = 40).apply {
                 add(arrayListOf(Player("Gatien"), Player("Gatien")))
             }
-            GameRunner.runGame(game)
+            gameRunner.runGame(game)
         }
         assert(console.getContent().contains("Gatien now has 40 Gold Coins"))
     }
@@ -115,7 +124,7 @@ class SomeTest {
         // (always bad answer and stay in penalty box)
 
         assertDoesNotThrow {
-            GameRunner.runGame(
+            gameRunner.runGame(
                 game,
                 shouldUseRandom = false,
                 firstRoll = 2,
@@ -137,7 +146,7 @@ class SomeTest {
         }
         // First roll 2: Bad Answer
         // Second roll 7: Go In Prison
-        GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 2, secondRoll = 7)
+        gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 2, secondRoll = 7)
         assert(!console.getContent().contains("Arthur is getting out of the penalty box"))
     }
 
@@ -149,7 +158,7 @@ class SomeTest {
         }
         // First roll 2: Good Answer
         // Second roll 7: Go In Prison
-        GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
+        gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
         assert(console.getContent().contains("Arthur is getting out of the penalty box"))
     }
     //endregion
@@ -161,7 +170,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Louis"), Player("Gatien", doesNotWantToAnswer = true)))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(console.getContent().contains("Gatien doesn't want to answer and left the game"))
         val afterPlayerLeft = console.getContent().split("Gatien doesn't want to answer and left the game")[1]
         assert(!afterPlayerLeft.contains("Gatien"))
@@ -175,8 +184,28 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Gatien"), Player("Louis", wantToUseJoker = true)))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(console.getContent().contains("Louis uses his jokerGatien is the current player"))
+    }
+    //endregion
+
+    //region COULD REPLAY GAME
+    @Test
+    fun `cannot replay game if no game has been played`() {
+        assertThrows<CouldNotReplayGameError> {
+            gameRunner.replay()
+        }
+    }
+
+    @Test
+    fun `game can be replayed`() {
+        val game = Game().apply {
+            add(arrayListOf(Player("Gatien"), Player("Gatien")))
+        }
+        gameRunner.runGame(game)
+        assertDoesNotThrow {
+            gameRunner.replay()
+        }
     }
     //endregion
 }
