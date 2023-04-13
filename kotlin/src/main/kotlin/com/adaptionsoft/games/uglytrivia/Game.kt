@@ -33,13 +33,18 @@ class Game(
     private var peopleQuestions = LinkedList<String>()
 
     private var currentPlayerIndex = 0
-    private var isGettingOutOfPenaltyBox: Boolean = false
 
     private var numberOfQuestions = 0
     private var currentCategory: Category? = null
 
     val isLeaderboardComplete: Boolean
         get() = leaderboard.isComplete()
+
+    val currentPlayerTimesGotInJail: Int
+        get() = players[currentPlayerIndex].timesGotInPrison
+
+    val currentPlayerIsInJail: Boolean
+        get() = players[currentPlayerIndex].isInPenaltyBox
 
     enum class Category {
         POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO, PEOPLE
@@ -78,22 +83,12 @@ class Game(
         console.println("They have rolled a $roll")
 
         if (players[currentPlayerIndex].isInPenaltyBox) {
-            if (roll % 2 != 0) {
-                isGettingOutOfPenaltyBox = true
-
+            console.println("${players[currentPlayerIndex].name} has 1/$currentPlayerTimesGotInJail chance to exit jail")
+            if (roll == 1) {
                 players[currentPlayerIndex].isInPenaltyBox = false
                 console.println("${players[currentPlayerIndex].name} is getting out of the penalty box")
-                players[currentPlayerIndex].place = players[currentPlayerIndex].place + roll
-                if (players[currentPlayerIndex].place > 11) players[currentPlayerIndex].place = players[currentPlayerIndex].place - 12
-
-                console.println(players[currentPlayerIndex].name
-                        + "'s new location is "
-                        + players[currentPlayerIndex].place)
-                console.println("The category is " + currentCategory())
-                askQuestion()
             } else {
                 console.println("${players[currentPlayerIndex].name} is not getting out of the penalty box")
-                isGettingOutOfPenaltyBox = false
             }
         } else {
             players[currentPlayerIndex].place = players[currentPlayerIndex].place + roll
@@ -121,38 +116,23 @@ class Game(
             return
         }
         if (players[currentPlayerIndex].isInPenaltyBox) {
-            if (isGettingOutOfPenaltyBox) {
-                console.println("Answer was correct!!!!")
-                players[currentPlayerIndex].correctAnswerStrike++
-                players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
-                console.println(players[currentPlayerIndex].name
-                        + " now has "
-                        + players[currentPlayerIndex].purses
-                        + " Gold Coins.")
-
-                if (didPlayerWin()) {
-                    leaderboard.addWinner()
-                    players[currentPlayerIndex].hasWin = true
-                }
-            }
             incrementCurrentPlayerIndex()
-        } else {
-            console.println("Answer was correct!!!!")
-            players[currentPlayerIndex].correctAnswerStrike++
-            players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
-            console.println(players[currentPlayerIndex].name
-                    + " now has "
-                    + players[currentPlayerIndex].purses
-                    + " Gold Coins.")
-
-            if (didPlayerWin()) {
-                leaderboard.addWinner()
-                players[currentPlayerIndex].hasWin = true
-                console.println("${players[currentPlayerIndex].name} win")
-            }
-            currentPlayerIndex++
-            if (currentPlayerIndex == players.size) currentPlayerIndex = 0
+            return
         }
+        console.println("Answer was correct!!!!")
+        players[currentPlayerIndex].correctAnswerStrike++
+        players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
+        console.println(players[currentPlayerIndex].name
+                + " now has "
+                + players[currentPlayerIndex].purses
+                + " Gold Coins.")
+
+        if (didPlayerWin()) {
+            leaderboard.addWinner()
+            players[currentPlayerIndex].hasWin = true
+            console.println("${players[currentPlayerIndex].name} win")
+        }
+        incrementCurrentPlayerIndex()
     }
 
     fun getQuestionDistribution(): ArrayList<Pair<Category, Int>> {

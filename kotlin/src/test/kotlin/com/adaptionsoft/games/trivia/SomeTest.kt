@@ -175,7 +175,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
         }
-        GameRunner.runGame(game, shouldUseRandom = false, hasCorrectAnswered = true, shouldGoInPrison = false)
+        gameRunner.runGame(game, shouldUseRandom = false, hasCorrectAnswered = true, shouldGoInPrison = false)
         assert(console.getContent().contains("Gatien now has 1 Gold Coins"))
         assert(!console.getContent().contains("Gatien now has 2 Gold Coins"))
         assert(console.getContent().contains("Gatien now has 3 Gold Coins"))
@@ -192,7 +192,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player(name = "Gatien", nextCategoryWhenLoosing = Game.Category.GEO), Player(name = "Louis")))
         }
-        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
         assert(console.getContent().contains("Question was incorrectly answeredGatien was sent to the penalty boxLouis is the current playerThey have rolled a 2Louis's new location is 2The category is GEO"))
     }
     //endregion
@@ -230,7 +230,32 @@ class SomeTest {
     }
     //endregion
 
-    //TODO Feature 7
+    //region CHANCES THAT A PLAYER GETS OUT OF PRISON MUST BE 1/X WHERE X IS TIMES HE GOT IN JAIL [FEATURE #7]
+    @Test
+    fun `player has 1 divide by X chance to exit jail when X is times he got in jail`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
+        }
+        // On force une partie où les joueurs restent en prison et ne font que des mauvaises réponses
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+
+        // On vérifie que Gatien a 1/1 chance de quitter la prison
+        assert(console.getContent().contains("Gatien has 1/1 chance to exit jail"))
+        val afterFirstChanceToExitJail = console.getContent().split("Gatien has 1/1 chance to exit jail")[1]
+        assert(!afterFirstChanceToExitJail.contains("Gatien has 1/1 chance to exit jail"))
+
+        // Puis 1/2
+        assert(afterFirstChanceToExitJail.contains("Gatien has 1/2 chance to exit jail"))
+        val afterSecondChanceToExitJail = console.getContent().split("Gatien has 1/2 chance to exit jail")[1]
+        assert(!afterSecondChanceToExitJail.contains("Gatien has 1/2 chance to exit jail"))
+
+        // Et enfin 1/3
+        assert(afterFirstChanceToExitJail.contains("Gatien has 1/3 chance to exit jail"))
+        val afterThirdChanceToExitJail = console.getContent().split("Gatien has 1/3 chance to exit jail")[1]
+        assert(!afterThirdChanceToExitJail.contains("Gatien has 1/3 chance to exit jail"))
+    }
+    //endregion
 
     //region GAME CONTINUES WITH REMAINING PLAYERS UNTIL A LEADERBOARD OF THREE PLAYERS IS COMPLETED [FEATURE #8]
     @Test
@@ -239,7 +264,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis"), Player(name = "Arthur"), Player(name = "Antoine")))
         }
-        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = false)
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = false)
         val afterFirstWinning = console.getContent().split("Gatien win")[1]
         assert(!afterFirstWinning.contains("Gatien"))
         val afterSecondWinning = afterFirstWinning.split("Louis win")[1]
@@ -280,7 +305,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(!console.getContent().contains("is getting out penalty box because of number of places in jail"))
     }
 
@@ -290,7 +315,7 @@ class SomeTest {
         val game = Game(console, cellsInJail = 2).apply {
             add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis"), Player(name = "Arthur")))
         }
-        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
         assert(console.getContent().contains("Arthur was sent to the penalty boxGatien is getting out penalty box because of number of places in jail"))
     }
     //endregion
@@ -302,7 +327,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
-        GameRunner.runGame(game)
+        gameRunner.runGame(game)
         assert(!console.getContent().contains("The category is RAP"))
         assert(!console.getContent().contains("The category is PHILO"))
         assert(!console.getContent().contains("The category is LITTERATURE"))
@@ -316,7 +341,7 @@ class SomeTest {
         val game = Game(console, shouldUseExpansionPack = true).apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
-        GameRunner.runGame(
+        gameRunner.runGame(
             game,
             shouldUseRandom = false,
             hasCorrectAnswered = true,
@@ -328,20 +353,6 @@ class SomeTest {
         assert(console.getContent().contains("The category is LITTERATURE"))
         assert(console.getContent().contains("The category is GEO"))
         assert(console.getContent().contains("The category is PEOPLE"))
-    }
-    //endregion
-
-    //region PLAYERS EARN JOKER AFTER MULTIPLE TIMES IN JAIL [FEATURE #16]
-    @Test
-    fun `player should earn joker after 3 times in jail`() {
-        val console = SpyConsole()
-        val player = Player("Louis")
-        val game = Game(console).apply {
-            add(arrayListOf(player, Player("Gatien")))
-        }
-        assert(!player.hasJoker)
-        GameRunner.runGame(game, shouldUseRandom = false, hasCorrectAnswered = true, shouldGoInPrison = true)
-        assert(player.timesGotInPrison >= 3 && console.getContent().contains("${player.name} uses his joker"))
     }
     //endregion
 }

@@ -50,6 +50,9 @@ object GameRunner {
 
         do {
             if (shouldUseRandom) {
+                if (game.currentPlayerIsInJail) {
+                    game.roll(rand.nextInt(game.currentPlayerTimesGotInJail))
+                }
                 game.roll(rand.nextInt(5) + 1)
                 if (rand.nextInt(9) == 7) {
                     game.wrongAnswer()
@@ -58,7 +61,7 @@ object GameRunner {
                 }
             } else {
                 if (hasCorrectAnswered) {
-                    game.roll(7)
+                    game.roll(1)
                 } else {
                     game.roll(2)
                 }
