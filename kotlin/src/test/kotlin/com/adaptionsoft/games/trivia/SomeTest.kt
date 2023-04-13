@@ -84,6 +84,26 @@ class SomeTest {
     }
     //endregion
 
+    //region QUESTIONS DISTRIBUTION SHOULD BE PROPORTIONAL [BUG #4]
+    @Test
+    fun `questions distribution should be proportional`() {
+        val game = Game().apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Gatien")))
+        }
+
+        // Récupération des catégories utilisées (en fonction de l'expansion pack)
+        val array = game.getQuestionDistribution().filter { it.second > 0 }
+
+        // On vérifie que le nombre de question de la catégorie courante est égal à celui de la prochaine
+        array.forEachIndexed { index, pair ->
+            if (index + 1 < array.size) {
+                println(pair.toString() + " == " + array[index + 1].toString())
+                assertEquals(pair.second, array[index + 1].second)
+            }
+        }
+    }
+    //endregion
+
     //region INFINITE QUESTIONS [BUG #5]
     @Test
     fun `number of questions should be infinite`() {
@@ -159,6 +179,10 @@ class SomeTest {
     }
     //endregion
 
+    //TODO Feature 4
+
+    //TODO Feature 5
+
     //region MINIMAL GOLD REQUIRED [FEATURE #6]
     @Test
     fun `game with less than 6 gold should throw`() {
@@ -193,6 +217,12 @@ class SomeTest {
     }
     //endregion
 
+    //TODO Feature 7
+
+    //TODO Feature 8
+
+    //TODO Feature 9
+
     //region COULD REPLAY GAME [FEATURE #10]
     @Test
     fun `cannot replay game if no game has been played`() {
@@ -214,6 +244,8 @@ class SomeTest {
         assertEquals(defaultParameters, game.getParameters())
     }
     //endregion
+
+    //TODO Feature 11
 
     //region EXPANSION PACK [FEATURE #12]
     @Test

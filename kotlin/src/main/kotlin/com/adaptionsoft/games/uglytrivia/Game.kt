@@ -35,7 +35,7 @@ class Game(
 
     private var numberOfQuestions = 0
 
-    enum class CAT {
+    enum class Category {
         POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO
     }
 
@@ -151,6 +151,22 @@ class Game(
         }
     }
 
+    fun getQuestionDistribution(): ArrayList<Pair<Category, Int>> {
+        val arrayList = arrayListOf<Pair<Category, Int>>()
+
+        arrayList.add(Pair(Category.POP, popQuestions.size))
+        arrayList.add(Pair(Category.SCIENCE, scienceQuestions.size))
+        arrayList.add(Pair(Category.SPORT, sportsQuestions.size))
+        arrayList.add(Pair(Category.ROCK, rockQuestions.size))
+        arrayList.add(Pair(Category.TECHNO, technoQuestions.size))
+        arrayList.add(Pair(Category.RAP, rapQuestions.size))
+        arrayList.add(Pair(Category.PHILO, philoQuestions.size))
+        arrayList.add(Pair(Category.LITTERATURE, litteratureQuestions.size))
+        arrayList.add(Pair(Category.GEO, geoQuestions.size))
+
+        return arrayList
+    }
+
     fun wrongAnswer(): Boolean {
         try {
             // Check if player has been removed because doesn't want to answer
@@ -189,11 +205,11 @@ class Game(
         } else {
             try {
                 when (currentCategory()) {
-                    CAT.POP -> console.println(popQuestions.removeFirst().toString())
-                    CAT.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
-                    CAT.SPORT -> console.println(sportsQuestions.removeFirst().toString())
-                    CAT.ROCK -> console.println(rockQuestions.removeFirst().toString())
-                    CAT.TECHNO -> console.println(technoQuestions.removeFirst().toString())
+                    Category.POP -> console.println(popQuestions.removeFirst().toString())
+                    Category.SCIENCE -> console.println(scienceQuestions.removeFirst().toString())
+                    Category.SPORT -> console.println(sportsQuestions.removeFirst().toString())
+                    Category.ROCK -> console.println(rockQuestions.removeFirst().toString())
+                    Category.TECHNO -> console.println(technoQuestions.removeFirst().toString())
                     else -> {}
                 }
             } catch (exception: NoSuchElementException) {
@@ -210,24 +226,24 @@ class Game(
         }
     }
 
-    private fun currentCategory(): CAT {
+    private fun currentCategory(): Category {
         if (shouldUseExpansionPack) {
             return when (players[currentPlayerIndex].place) {
-                0 -> CAT.POP
-                1 -> CAT.SCIENCE
-                2, 10 -> CAT.SPORT
-                3, 11 -> CAT.RAP
-                4, 7 -> CAT.GEO
-                8 -> CAT.PHILO
-                9 -> CAT.LITTERATURE
-                else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+                0 -> Category.POP
+                1 -> Category.SCIENCE
+                2, 10 -> Category.SPORT
+                3, 11 -> Category.RAP
+                4, 7 -> Category.GEO
+                8 -> Category.PHILO
+                9 -> Category.LITTERATURE
+                else -> if (shouldReplaceRockByTechno) Category.TECHNO else Category.ROCK
             }
         } else {
             return when (players[currentPlayerIndex].place) {
-                0, 4, 8 -> CAT.POP
-                1, 5, 9 -> CAT.SCIENCE
-                2, 6, 10 -> CAT.SPORT
-                else -> if (shouldReplaceRockByTechno) CAT.TECHNO else CAT.ROCK
+                0, 4, 8 -> Category.POP
+                1, 5, 9 -> Category.SCIENCE
+                2, 6, 10 -> Category.SPORT
+                else -> if (shouldReplaceRockByTechno) Category.TECHNO else Category.ROCK
             }
         }
     }
