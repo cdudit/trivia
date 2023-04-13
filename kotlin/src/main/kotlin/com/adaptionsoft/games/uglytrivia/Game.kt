@@ -36,6 +36,9 @@ class Game(
     private var numberOfQuestions = 0
     private var currentCategory: Category? = null
 
+    val isLeaderboardComplete: Boolean
+        get() = leaderboard.isComplete()
+
     enum class Category {
         POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO
     }
@@ -103,21 +106,18 @@ class Game(
 
     }
 
-    fun wasCorrectlyAnswered(): Boolean {
+    fun wasCorrectlyAnswered() {
         try {
             // Check if player has been removed because doesn't want to answer
             players[currentPlayerIndex]
         } catch (error: IndexOutOfBoundsException) {
             incrementCurrentPlayerIndex()
-            if (players.size == 0) {
-                return false
-            }
-            return true
+            return
         }
         if (players[currentPlayerIndex].hasJoker) {
             players[currentPlayerIndex].hasJoker = false
             incrementCurrentPlayerIndex()
-            return true
+            return
         }
         if (players[currentPlayerIndex].isInPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
@@ -129,16 +129,16 @@ class Game(
                         + players[currentPlayerIndex].purses
                         + " Gold Coins.")
 
-                val winner = didPlayerNotWin()
+                if (didPlayerWin()) {
+                    leaderboard.addWinner()
+                    players[currentPlayerIndex].hasWin = true
+                }
                 incrementCurrentPlayerIndex()
-
-                return winner
             } else {
                 incrementCurrentPlayerIndex()
-                return true
             }
         } else {
-            console.println("Answer was corrent!!!!")
+            console.println("Answer was correct!!!!")
             players[currentPlayerIndex].correctAnswerStrike++
             players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
             console.println(players[currentPlayerIndex].name
@@ -146,11 +146,13 @@ class Game(
                     + players[currentPlayerIndex].purses
                     + " Gold Coins.")
 
-            val winner = didPlayerNotWin()
+            if (didPlayerWin()) {
+                leaderboard.addWinner()
+                players[currentPlayerIndex].hasWin = true
+                console.println("${players[currentPlayerIndex].name} win")
+            }
             currentPlayerIndex++
             if (currentPlayerIndex == players.size) currentPlayerIndex = 0
-
-            return winner
         }
     }
 
@@ -170,21 +172,21 @@ class Game(
         return arrayList
     }
 
-    fun wrongAnswer(): Boolean {
+    fun wrongAnswer() {
         try {
             // Check if player has been removed because doesn't want to answer
             players[currentPlayerIndex]
         } catch (error: IndexOutOfBoundsException) {
             if (players.size == 0) {
-                return false
+                return
             }
             incrementCurrentPlayerIndex()
-            return true
+            return
         }
         if (players[currentPlayerIndex].hasJoker) {
             players[currentPlayerIndex].hasJoker = false
             incrementCurrentPlayerIndex()
-            return true
+            return
         }
         console.println("Question was incorrectly answered")
         console.println(players[currentPlayerIndex].name + " was sent to the penalty box")
@@ -198,7 +200,6 @@ class Game(
         }
 
         incrementCurrentPlayerIndex()
-        return true
     }
 
     private fun askQuestion() {
@@ -228,9 +229,15 @@ class Game(
     }
 
     private fun incrementCurrentPlayerIndex() {
+        if (leaderboard.isComplete()) {
+            return
+        }
         currentPlayerIndex++
         if (currentPlayerIndex >= players.size) {
             currentPlayerIndex = 0
+        }
+        if (players[currentPlayerIndex].hasWin) {
+            incrementCurrentPlayerIndex()
         }
     }
 
@@ -266,7 +273,7 @@ class Game(
         if (minimalGoldRequired < 6) throw MinimalGoldRequiredNotEnoughError()
     }
 
-    private fun didPlayerNotWin(): Boolean = players[currentPlayerIndex].purses < minimalGoldRequired
+    private fun didPlayerWin(): Boolean = players[currentPlayerIndex].purses >= minimalGoldRequired
 
     private fun fillQuestions() {
         for (i in numberOfQuestions..numberOfQuestions + 49) {

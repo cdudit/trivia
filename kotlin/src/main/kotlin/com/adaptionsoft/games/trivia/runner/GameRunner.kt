@@ -7,8 +7,6 @@ import com.adaptionsoft.games.uglytrivia.errors.CouldNotReplayGameError
 import java.util.*
 
 object GameRunner {
-    private var notAWinner: Boolean = false
-
     private var lastGame: Game? = null
     private var lastShouldUseRandom: Boolean = true
     private var lastShouldGoInPrison: Boolean = true
@@ -53,7 +51,7 @@ object GameRunner {
         do {
             if (shouldUseRandom) {
                 game.roll(rand.nextInt(5) + 1)
-                notAWinner = if (rand.nextInt(9) == 7) {
+                if (rand.nextInt(9) == 7) {
                     game.wrongAnswer()
                 } else {
                     game.wasCorrectlyAnswered()
@@ -65,14 +63,14 @@ object GameRunner {
                     game.roll(2)
                 }
                 val secondRoll = if (shouldGoInPrison) 7 else 2
-                notAWinner = if (secondRoll == 7) {
+                if (secondRoll == 7) {
                     game.wrongAnswer()
                 } else {
                     game.wasCorrectlyAnswered()
                 }
                 counter++
             }
-        } while (notAWinner && counter < shouldStopAfterNumberOfQuestions)
+        } while (!game.isLeaderboardComplete && counter < shouldStopAfterNumberOfQuestions)
     }
 }
 

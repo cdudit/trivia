@@ -232,7 +232,22 @@ class SomeTest {
 
     //TODO Feature 7
 
-    //TODO Feature 8
+    //region GAME CONTINUES WITH REMAINING PLAYERS UNTIL A LEADERBOARD OF THREE PLAYERS IS COMPLETED [FEATURE #8]
+    @Test
+    fun `game should continue while leaderboard is not completed`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis"), Player(name = "Arthur"), Player(name = "Antoine")))
+        }
+        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = false)
+        val afterFirstWinning = console.getContent().split("Gatien win")[1]
+        assert(!afterFirstWinning.contains("Gatien"))
+        val afterSecondWinning = afterFirstWinning.split("Louis win")[1]
+        assert(!afterSecondWinning.contains("Louis"))
+        val afterThirdWinning = afterSecondWinning.split("Arthur win")[1]
+        assert(!afterThirdWinning.contains("Arthur"))
+    }
+    //endregion
 
     //TODO Feature 9
 
