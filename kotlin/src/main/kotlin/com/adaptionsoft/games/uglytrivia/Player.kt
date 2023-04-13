@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia
 
+import java.util.Date
+
 data class Player(
     val name: String,
     var purses: Int = 0,
@@ -10,5 +12,6 @@ data class Player(
     var hasJoker: Boolean = false,
     var correctAnswerStrike: Int = 0,
     val nextCategoryWhenLoosing: Game.Category? = null,
-    var hasWin: Boolean = false
+    var hasWin: Boolean = false,
+    var dateInJail: Date? = null
 )

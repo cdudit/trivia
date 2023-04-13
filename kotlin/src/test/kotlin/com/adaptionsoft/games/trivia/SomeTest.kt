@@ -273,7 +273,27 @@ class SomeTest {
     }
     //endregion
 
-    //TODO Feature 11
+    //region NUMBER OF CELLS IN PRISON IS NOW CONFIGURABLE [FEATURE #11]
+    @Test
+    fun `number of cells should be default to unlimited`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
+        }
+        GameRunner.runGame(game)
+        assert(!console.getContent().contains("is getting out penalty box because of number of places in jail"))
+    }
+
+    @Test
+    fun `if number of cells in jail is limited, latest player in jail is freed`() {
+        val console = SpyConsole()
+        val game = Game(console, cellsInJail = 2).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis"), Player(name = "Arthur")))
+        }
+        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+        assert(console.getContent().contains("Arthur was sent to the penalty boxGatien is getting out penalty box because of number of places in jail"))
+    }
+    //endregion
 
     //region EXPANSION PACK [FEATURE #12]
     @Test

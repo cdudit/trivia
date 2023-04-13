@@ -14,7 +14,8 @@ class Game(
     private val console: IConsole = SystemConsole(),
     private val shouldReplaceRockByTechno: Boolean = false,
     private val minimalGoldRequired: Int = 6,
-    private val shouldUseExpansionPack: Boolean = false
+    private val shouldUseExpansionPack: Boolean = false,
+    private val cellsInJail: Int = 0
 ) {
     private var players = arrayListOf<Player>()
 
@@ -103,7 +104,6 @@ class Game(
             console.println("The category is " + currentCategory())
             askQuestion()
         }
-
     }
 
     fun wasCorrectlyAnswered() {
@@ -133,10 +133,8 @@ class Game(
                     leaderboard.addWinner()
                     players[currentPlayerIndex].hasWin = true
                 }
-                incrementCurrentPlayerIndex()
-            } else {
-                incrementCurrentPlayerIndex()
             }
+            incrementCurrentPlayerIndex()
         } else {
             console.println("Answer was correct!!!!")
             players[currentPlayerIndex].correctAnswerStrike++
@@ -193,6 +191,14 @@ class Game(
         currentCategory = players[currentPlayerIndex].nextCategoryWhenLoosing
         players[currentPlayerIndex].correctAnswerStrike = 0
         players[currentPlayerIndex].isInPenaltyBox = true
+        players[currentPlayerIndex].dateInJail = Date()
+        val numberInJail = players.count { it.isInPenaltyBox }
+        if (cellsInJail in 1 until numberInJail) {
+            val player = players.filter { it.isInPenaltyBox }.sortedBy { it.dateInJail }.firstOrNull()
+            player?.dateInJail = null
+            player?.isInPenaltyBox = false
+            console.println("${player?.name} is getting out penalty box because of number of places in jail")
+        }
         players[currentPlayerIndex].timesGotInPrison++
         if (players[currentPlayerIndex].timesGotInPrison % 3 == 0) {
             console.println("${players[currentPlayerIndex].name} earns a joker after ${players[currentPlayerIndex].timesGotInPrison} turn in jail")
