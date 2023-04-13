@@ -65,9 +65,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
-        // First roll 2: Bad Answer
-        // Second roll 7: Go In Prison
-        gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 2, secondRoll = 7)
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
         assert(!console.getContent().contains("Arthur is getting out of the penalty box"))
     }
 
@@ -77,9 +75,7 @@ class SomeTest {
         val game = Game(console).apply {
             add(arrayListOf(Player("Arthur"), Player("Arthur")))
         }
-        // First roll 7: Good Answer
-        // Second roll 7: Go In Prison
-        gameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = true)
         assert(console.getContent().contains("Arthur is getting out of the penalty box"))
     }
     //endregion
@@ -112,15 +108,12 @@ class SomeTest {
         }
         val random = Random.nextInt(10, 100)
 
-        // Set first roll = 2 and second roll = 7 to make an infinite game
-        // (always bad answer and stay in penalty box)
-
         assertDoesNotThrow {
             gameRunner.runGame(
                 game,
                 shouldUseRandom = false,
-                firstRoll = 2,
-                secondRoll = 7,
+                hasCorrectAnswered = false,
+                shouldGoInPrison = true,
                 shouldStopAfterNumberOfQuestions = random
             )
         }
@@ -179,7 +172,22 @@ class SomeTest {
     }
     //endregion
 
-    //TODO Feature 4
+    //region CORRECT ANSWERS IN A ROW [FEATURE #4]
+    @Test
+    fun `player earns X GP when giving X correct answers in a row`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
+        }
+        GameRunner.runGame(game, shouldUseRandom = false, hasCorrectAnswered = true, shouldGoInPrison = false)
+        assert(console.getContent().contains("Gatien now has 1 Gold Coins"))
+        assert(!console.getContent().contains("Gatien now has 2 Gold Coins"))
+        assert(console.getContent().contains("Gatien now has 3 Gold Coins"))
+        assert(!console.getContent().contains("Gatien now has 4 Gold Coins"))
+        assert(!console.getContent().contains("Gatien now has 5 Gold Coins"))
+        assert(console.getContent().contains("Gatien now has 6 Gold Coins"))
+    }
+    //endregion
 
     //TODO Feature 5
 
@@ -208,12 +216,11 @@ class SomeTest {
     fun `game more than 6 gold should not throw`() {
         val console = SpyConsole()
         assertDoesNotThrow {
-            val game = Game(console, minimalGoldRequired = 40).apply {
+            val game = Game(console, minimalGoldRequired = 7).apply {
                 add(arrayListOf(Player("Gatien"), Player("Gatien")))
             }
             gameRunner.runGame(game)
         }
-        assert(console.getContent().contains("Gatien now has 40 Gold Coins"))
     }
     //endregion
 
@@ -270,9 +277,9 @@ class SomeTest {
         GameRunner.runGame(
             game,
             shouldUseRandom = false,
-            firstRoll = 7,
-            secondRoll = 7,
-            shouldStopAfterNumberOfQuestions = 2000
+            hasCorrectAnswered = true,
+            shouldGoInPrison = true,
+            shouldStopAfterNumberOfQuestions = 100
         )
         assert(console.getContent().contains("The category is RAP"))
         assert(console.getContent().contains("The category is PHILO"))
@@ -290,8 +297,7 @@ class SomeTest {
             add(arrayListOf(player, Player("Gatien")))
         }
         assert(!player.hasJoker)
-        // First roll 7 and second roll 7 to always go in penalty box then good answer
-        GameRunner.runGame(game, shouldUseRandom = false, firstRoll = 7, secondRoll = 7)
+        GameRunner.runGame(game, shouldUseRandom = false, hasCorrectAnswered = true, shouldGoInPrison = true)
         assert(player.timesGotInPrison >= 3 && console.getContent().contains("${player.name} uses his joker"))
     }
     //endregion

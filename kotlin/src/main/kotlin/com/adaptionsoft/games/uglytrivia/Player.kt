@@ -7,5 +7,6 @@ data class Player(
     var isInPenaltyBox: Boolean = false,
     var timesGotInPrison: Int = 0,
     val doesNotWantToAnswer: Boolean = false,
-    var hasJoker: Boolean = false
+    var hasJoker: Boolean = false,
+    var correctAnswerStrike: Int = 0
 )

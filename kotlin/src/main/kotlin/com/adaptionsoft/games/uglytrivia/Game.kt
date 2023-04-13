@@ -121,7 +121,8 @@ class Game(
         if (players[currentPlayerIndex].isInPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 console.println("Answer was correct!!!!")
-                players[currentPlayerIndex].purses++
+                players[currentPlayerIndex].correctAnswerStrike++
+                players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
                 console.println(players[currentPlayerIndex].name
                         + " now has "
                         + players[currentPlayerIndex].purses
@@ -137,7 +138,8 @@ class Game(
             }
         } else {
             console.println("Answer was corrent!!!!")
-            players[currentPlayerIndex].purses++
+            players[currentPlayerIndex].correctAnswerStrike++
+            players[currentPlayerIndex].purses += players[currentPlayerIndex].correctAnswerStrike
             console.println(players[currentPlayerIndex].name
                     + " now has "
                     + players[currentPlayerIndex].purses
@@ -185,6 +187,7 @@ class Game(
         }
         console.println("Question was incorrectly answered")
         console.println(players[currentPlayerIndex].name + " was sent to the penalty box")
+        players[currentPlayerIndex].correctAnswerStrike = 0
         players[currentPlayerIndex].isInPenaltyBox = true
         players[currentPlayerIndex].timesGotInPrison++
         if (players[currentPlayerIndex].timesGotInPrison % 3 == 0) {
@@ -210,7 +213,10 @@ class Game(
                     Category.SPORT -> console.println(sportsQuestions.removeFirst().toString())
                     Category.ROCK -> console.println(rockQuestions.removeFirst().toString())
                     Category.TECHNO -> console.println(technoQuestions.removeFirst().toString())
-                    else -> {}
+                    Category.RAP -> console.println(rapQuestions.removeFirst().toString())
+                    Category.PHILO -> console.println(philoQuestions.removeFirst().toString())
+                    Category.LITTERATURE -> console.println(litteratureQuestions.removeFirst().toString())
+                    Category.GEO -> console.println(geoQuestions.removeFirst().toString())
                 }
             } catch (exception: NoSuchElementException) {
                 fillQuestions()

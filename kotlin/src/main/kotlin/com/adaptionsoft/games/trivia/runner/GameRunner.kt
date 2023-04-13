@@ -11,8 +11,8 @@ object GameRunner {
 
     private var lastGame: Game? = null
     private var lastShouldUseRandom: Boolean = true
-    private var lastFirstRoll: Int = -1
-    private var lastSecondRoll: Int = -1
+    private var lastShouldGoInPrison: Boolean = true
+    private var lastHasCorrectAnswered: Boolean = true
     private var lastShouldStopAfterNumberOfQuestions: Int = 50
 
     fun reset() {
@@ -27,8 +27,8 @@ object GameRunner {
             runGame(
                 it,
                 lastShouldUseRandom,
-                lastFirstRoll,
-                lastSecondRoll,
+                lastShouldGoInPrison,
+                lastHasCorrectAnswered,
                 lastShouldStopAfterNumberOfQuestions
             )
         }
@@ -37,14 +37,14 @@ object GameRunner {
     fun runGame(
         game: Game,
         shouldUseRandom: Boolean = true,
-        firstRoll: Int = -1,
-        secondRoll: Int = -1,
+        shouldGoInPrison: Boolean = true,
+        hasCorrectAnswered: Boolean = true, // = shouldStayInPrison,
         shouldStopAfterNumberOfQuestions: Int = 50
     ) {
         lastGame = game
         lastShouldUseRandom = shouldUseRandom
-        lastFirstRoll = firstRoll
-        lastSecondRoll = secondRoll
+        lastShouldGoInPrison = shouldGoInPrison
+        lastHasCorrectAnswered = hasCorrectAnswered
         lastShouldStopAfterNumberOfQuestions = shouldStopAfterNumberOfQuestions
 
         var counter = 0
@@ -59,7 +59,12 @@ object GameRunner {
                     game.wasCorrectlyAnswered()
                 }
             } else {
-                game.roll(firstRoll)
+                if (hasCorrectAnswered) {
+                    game.roll(7)
+                } else {
+                    game.roll(2)
+                }
+                val secondRoll = if (shouldGoInPrison) 7 else 2
                 notAWinner = if (secondRoll == 7) {
                     game.wrongAnswer()
                 } else {
