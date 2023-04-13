@@ -307,6 +307,7 @@ class SomeTest {
         assert(!console.getContent().contains("The category is PHILO"))
         assert(!console.getContent().contains("The category is LITTERATURE"))
         assert(!console.getContent().contains("The category is GEO"))
+        assert(!console.getContent().contains("The category is PEOPLE"))
     }
 
     @Test
@@ -326,6 +327,7 @@ class SomeTest {
         assert(console.getContent().contains("The category is PHILO"))
         assert(console.getContent().contains("The category is LITTERATURE"))
         assert(console.getContent().contains("The category is GEO"))
+        assert(console.getContent().contains("The category is PEOPLE"))
     }
     //endregion
 

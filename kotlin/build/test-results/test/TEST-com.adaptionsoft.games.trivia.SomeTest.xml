@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.adaptionsoft.games.trivia.SomeTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2023-04-13T12:30:59" hostname="MacBook-Pro-de-Clement.local" time="0.06">
+<testsuite name="com.adaptionsoft.games.trivia.SomeTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2023-04-13T12:33:41" hostname="MacBook-Pro-de-Clement.local" time="0.063">
   <properties/>
   <testcase name="player should choose next category when loosing()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.02"/>
-  <testcase name="player can use joker, doesn't answer and doesn't win gold()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
-  <testcase name="player earns X GP when giving X correct answers in a row()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
-  <testcase name="game with less than 6 gold should throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.003"/>
-  <testcase name="when using expansion pack, specific categories must be played()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.006"/>
-  <testcase name="game should run if player are 2 or more and 6 or less()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
-  <testcase name="cannot replay game if no game has been played()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="player can use joker, doesn't answer and doesn't win gold()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.002"/>
+  <testcase name="player earns X GP when giving X correct answers in a row()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="game with less than 6 gold should throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.002"/>
+  <testcase name="when using expansion pack, specific categories must be played()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.007"/>
+  <testcase name="game should run if player are 2 or more and 6 or less()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.002"/>
+  <testcase name="cannot replay game if no game has been played()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.004"/>
   <testcase name="should quit prison()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.003"/>
   <testcase name="game should not run if player are more than 6()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="questions distribution should be proportional()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="game should not run if player are less than 2()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
   <testcase name="if number of cells in jail is limited, latest player in jail is freed()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.008"/>
   <testcase name="player doesn't want to answer the question and leave the game()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
-  <testcase name="game with 6 gold should not throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
-  <testcase name="should stay in prison()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
-  <testcase name="game more than 6 gold should not throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.002"/>
+  <testcase name="game with 6 gold should not throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
+  <testcase name="should stay in prison()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.002"/>
+  <testcase name="game more than 6 gold should not throw()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="number of questions should be infinite()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.003"/>
   <testcase name="when NOT using expansion pack, specific categories MUST NOT be played()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
-  <testcase name="without replacing category is rock and not techno()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
+  <testcase name="without replacing category is rock and not techno()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="game can be replayed()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="should replace rock by techno()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
   <testcase name="player should earn joker after 3 times in jail()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
   <testcase name="number of cells should be default to unlimited()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
-  <testcase name="game should continue while leaderboard is not completed()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.001"/>
+  <testcase name="game should continue while leaderboard is not completed()" classname="com.adaptionsoft.games.trivia.SomeTest" time="0.0"/>
   <system-out><![CDATA[Gatien was added
 They are player number 1
 Louis was added
@@ -276,39 +276,61 @@ They are player number 1
 Louis was added
 They are player number 2
 Gatien is the current player
-They have rolled a 1
-Gatien's new location is 1
+They have rolled a 5
+Gatien's new location is 5
 The category is SCIENCE
 Science Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Louis is the current player
-They have rolled a 5
-Louis's new location is 5
-The category is SCIENCE
+They have rolled a 2
+Louis's new location is 2
+The category is SPORT
 Louis uses his joker
 Gatien is the current player
-They have rolled a 1
-Gatien's new location is 2
-The category is SPORT
-Sports Question 0
+They have rolled a 2
+Gatien's new location is 7
+The category is ROCK
+Rock Question 0
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Louis is the current player
-They have rolled a 1
-Louis's new location is 6
-The category is SPORT
-Sports Question 1
-Answer was correct!!!!
-Louis now has 1 Gold Coins.
-Gatien is the current player
 They have rolled a 2
-Gatien's new location is 4
+Louis's new location is 4
 The category is POP
 Pop Question 0
 Answer was correct!!!!
-Gatien now has 6 Gold Coins.
-Gatien win
+Louis now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 1
+Gatien's new location is 8
+The category is POP
+Pop Question 1
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Louis is the current player
+They have rolled a 1
+Louis's new location is 5
+The category is SCIENCE
+Science Question 1
+Answer was correct!!!!
+Louis now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien is getting out of the penalty box
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 2
+Answer was correct!!!!
+Gatien now has 4 Gold Coins.
+Louis is the current player
+They have rolled a 2
+Louis's new location is 7
+The category is ROCK
+Rock Question 1
+Answer was correct!!!!
+Louis now has 6 Gold Coins.
+Louis win
 Gatien was added
 They are player number 1
 Louis was added
@@ -495,16 +517,16 @@ Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 2
+The category is PEOPLE
+People Question 0
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 3
+The category is PEOPLE
+People Question 1
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -556,7 +578,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 4
+Sports Question 2
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -564,7 +586,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 5
+Sports Question 3
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -675,16 +697,16 @@ Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 6
+The category is PEOPLE
+People Question 2
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 7
+The category is PEOPLE
+People Question 3
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -736,7 +758,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 8
+Sports Question 4
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -744,7 +766,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 9
+Sports Question 5
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -855,16 +877,16 @@ Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 10
+The category is PEOPLE
+People Question 4
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 11
+The category is PEOPLE
+People Question 5
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -916,7 +938,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 12
+Sports Question 6
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -924,7 +946,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 13
+Sports Question 7
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -1035,16 +1057,16 @@ Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 14
+The category is PEOPLE
+People Question 6
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 10
-The category is SPORT
-Sports Question 15
+The category is PEOPLE
+People Question 7
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -1096,7 +1118,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 16
+Sports Question 8
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
@@ -1104,7 +1126,7 @@ They have rolled a 7
 Gatien is getting out of the penalty box
 Gatien's new location is 2
 The category is SPORT
-Sports Question 17
+Sports Question 9
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien was added
@@ -1112,38 +1134,38 @@ They are player number 1
 Gatien was added
 They are player number 2
 Gatien is the current player
-They have rolled a 4
-Gatien's new location is 4
-The category is POP
-Pop Question 0
+They have rolled a 3
+Gatien's new location is 3
+The category is ROCK
+Rock Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 4
-Gatien's new location is 4
-The category is POP
-Pop Question 1
+They have rolled a 1
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 4
-Gatien's new location is 8
-The category is POP
-Pop Question 2
+They have rolled a 3
+Gatien's new location is 6
+The category is SPORT
+Sports Question 0
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
 They have rolled a 4
-Gatien's new location is 8
-The category is POP
-Pop Question 3
-Question was incorrectly answered
-Gatien was sent to the penalty box
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 1
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 3
+They have rolled a 5
 Gatien's new location is 11
 The category is ROCK
-Rock Question 0
+Rock Question 1
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -1677,16 +1699,13 @@ The category is SPORT
 Sports Question 5
 Question was incorrectly answered
 Gatien was sent to the penalty box
-Louis is getting out penalty box because of number of places in jail
+Gatien is getting out penalty box because of number of places in jail
 Gatien earns a joker after 6 turn in jail
 Louis is the current player
 They have rolled a 2
-Louis's new location is 6
-The category is SPORT
-Sports Question 6
+Louis is not getting out of the penalty box
 Question was incorrectly answered
 Louis was sent to the penalty box
-Gatien is getting out penalty box because of number of places in jail
 Louis earns a joker after 6 turn in jail
 Arthur is the current player
 They have rolled a 2
@@ -1709,7 +1728,7 @@ Gatien is the current player
 They have rolled a 2
 Gatien's new location is 6
 The category is SPORT
-Sports Question 7
+Sports Question 6
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is getting out penalty box because of number of places in jail
@@ -1745,7 +1764,7 @@ Gatien is the current player
 They have rolled a 2
 Gatien's new location is 10
 The category is SPORT
-Sports Question 8
+Sports Question 7
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is getting out penalty box because of number of places in jail
@@ -1777,7 +1796,7 @@ Gatien is the current player
 They have rolled a 2
 Gatien's new location is 2
 The category is SPORT
-Sports Question 9
+Sports Question 8
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is getting out penalty box because of number of places in jail
@@ -1813,7 +1832,7 @@ Gatien is the current player
 They have rolled a 2
 Gatien's new location is 6
 The category is SPORT
-Sports Question 10
+Sports Question 9
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is getting out penalty box because of number of places in jail
@@ -1845,7 +1864,7 @@ Gatien is the current player
 They have rolled a 2
 Gatien's new location is 10
 The category is SPORT
-Sports Question 11
+Sports Question 10
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is getting out penalty box because of number of places in jail
@@ -1866,68 +1885,112 @@ Science Question 0
 Answer was correct!!!!
 Louis now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 4
-Gatien's new location is 4
-The category is POP
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
 Gatien doesn't want to answer and left the game
 Louis is the current player
-They have rolled a 3
+They have rolled a 4
+Louis's new location is 5
+The category is SCIENCE
+Science Question 1
+Answer was correct!!!!
+Louis now has 3 Gold Coins.
+Louis is the current player
+They have rolled a 5
+Louis's new location is 10
+The category is SPORT
+Sports Question 0
+Question was incorrectly answered
+Louis was sent to the penalty box
+Louis is the current player
+They have rolled a 1
+Louis is getting out of the penalty box
+Louis's new location is 11
+The category is ROCK
+Rock Question 0
+Answer was correct!!!!
+Louis now has 4 Gold Coins.
+Louis is the current player
+They have rolled a 2
+Louis's new location is 1
+The category is SCIENCE
+Science Question 2
+Question was incorrectly answered
+Louis was sent to the penalty box
+Louis is the current player
+They have rolled a 4
+Louis is not getting out of the penalty box
+Louis is the current player
+They have rolled a 2
+Louis is not getting out of the penalty box
+Louis is the current player
+They have rolled a 5
+Louis is getting out of the penalty box
+Louis's new location is 6
+The category is SPORT
+Sports Question 1
+Question was incorrectly answered
+Louis was sent to the penalty box
+Louis earns a joker after 3 turn in jail
+Louis is the current player
+They have rolled a 5
+Louis is getting out of the penalty box
+Louis's new location is 11
+The category is ROCK
+Louis uses his joker
+Louis is the current player
+They have rolled a 5
 Louis's new location is 4
 The category is POP
 Pop Question 0
 Answer was correct!!!!
-Louis now has 3 Gold Coins.
+Louis now has 5 Gold Coins.
 Louis is the current player
-They have rolled a 2
-Louis's new location is 6
-The category is SPORT
-Sports Question 0
+They have rolled a 1
+Louis's new location is 5
+The category is SCIENCE
+Science Question 3
 Answer was correct!!!!
-Louis now has 6 Gold Coins.
+Louis now has 7 Gold Coins.
 Louis win
 Gatien was added
 They are player number 1
 Gatien was added
 They are player number 2
 Gatien is the current player
-They have rolled a 1
-Gatien's new location is 1
+They have rolled a 5
+Gatien's new location is 5
 The category is SCIENCE
 Science Question 0
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 3
-Gatien's new location is 3
-The category is ROCK
-Rock Question 0
-Answer was correct!!!!
-Gatien now has 1 Gold Coins.
-Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 1
-Gatien's new location is 4
-The category is POP
-Pop Question 0
-Answer was correct!!!!
-Gatien now has 3 Gold Coins.
-Gatien is the current player
-They have rolled a 3
-Gatien is getting out of the penalty box
-Gatien's new location is 4
-The category is POP
-Pop Question 1
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
 They have rolled a 5
-Gatien's new location is 9
+Gatien's new location is 5
 The category is SCIENCE
 Science Question 1
+Answer was correct!!!!
+Gatien now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 1
+Gatien's new location is 6
+The category is SPORT
+Sports Question 0
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 2
+Gatien's new location is 7
+The category is ROCK
+Rock Question 0
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 3
+Gatien's new location is 9
+The category is SCIENCE
+Science Question 2
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -2189,12 +2252,12 @@ Rock Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 3
-Gatien's new location is 3
-The category is ROCK
-Rock Question 1
-Answer was correct!!!!
-Gatien now has 1 Gold Coins.
+They have rolled a 2
+Gatien's new location is 2
+The category is SPORT
+Sports Question 0
+Question was incorrectly answered
+Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 1
 Gatien's new location is 4
@@ -2203,31 +2266,32 @@ Pop Question 0
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien's new location is 5
-The category is SCIENCE
-Science Question 0
+They have rolled a 5
+Gatien is getting out of the penalty box
+Gatien's new location is 7
+The category is ROCK
+Rock Question 1
 Answer was correct!!!!
-Gatien now has 3 Gold Coins.
+Gatien now has 1 Gold Coins.
 Gatien is the current player
 They have rolled a 1
 Gatien's new location is 5
 The category is SCIENCE
-Science Question 1
+Science Question 0
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
+Gatien is the current player
+They have rolled a 2
+Gatien's new location is 9
+The category is SCIENCE
+Science Question 1
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
 Gatien is the current player
 They have rolled a 3
 Gatien's new location is 8
 The category is POP
 Pop Question 1
-Answer was correct!!!!
-Gatien now has 6 Gold Coins.
-Gatien is the current player
-They have rolled a 5
-Gatien's new location is 10
-The category is SPORT
-Sports Question 0
 Answer was correct!!!!
 Gatien now has 10 Gold Coins.
 Gatien win
@@ -2347,18 +2411,191 @@ Gatien is not getting out of the penalty box
 Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien earns a joker after 9 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 12 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 12 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 15 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 15 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 18 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 18 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 21 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien earns a joker after 21 turn in jail
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
+Gatien is the current player
+They have rolled a 2
+Gatien is not getting out of the penalty box
+Question was incorrectly answered
+Gatien was sent to the penalty box
 
-Number of roll: 22
+Number of roll: 59
 
 Gatien was added
 They are player number 1
 Gatien was added
 They are player number 2
 Gatien is the current player
-They have rolled a 3
-Gatien's new location is 3
-The category is ROCK
-Rock Question 0
+They have rolled a 1
+Gatien's new location is 1
+The category is SCIENCE
+Science Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
@@ -2370,40 +2607,24 @@ Question was incorrectly answered
 Gatien was sent to the penalty box
 Gatien is the current player
 They have rolled a 1
-Gatien's new location is 4
-The category is POP
-Pop Question 0
+Gatien's new location is 2
+The category is SPORT
+Sports Question 1
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien's new location is 8
-The category is POP
-Pop Question 1
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Gatien is the current player
 They have rolled a 5
 Gatien is getting out of the penalty box
-Gatien's new location is 1
-The category is SCIENCE
-Science Question 0
+Gatien's new location is 7
+The category is ROCK
+Rock Question 0
 Answer was correct!!!!
-Gatien now has 4 Gold Coins.
+Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Gatien is the current player
-They have rolled a 3
-Gatien's new location is 4
-The category is POP
-Pop Question 2
+They have rolled a 1
+Gatien's new location is 3
+The category is ROCK
+Rock Question 1
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -2412,69 +2633,38 @@ They are player number 1
 Gatien was added
 They are player number 2
 Gatien is the current player
-They have rolled a 3
-Gatien's new location is 3
-The category is ROCK
-Rock Question 0
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien's new location is 4
-The category is POP
-Pop Question 0
+They have rolled a 5
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 4
-Gatien is not getting out of the penalty box
+They have rolled a 2
+Gatien's new location is 2
+The category is SPORT
+Sports Question 0
+Answer was correct!!!!
+Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 3
+They have rolled a 2
+Gatien's new location is 7
+The category is ROCK
+Rock Question 0
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
 Gatien's new location is 7
 The category is ROCK
 Rock Question 1
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Gatien is the current player
-They have rolled a 1
-Gatien's new location is 8
-The category is POP
-Pop Question 1
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien is not getting out of the penalty box
-Gatien is the current player
-They have rolled a 2
-Gatien is not getting out of the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien is not getting out of the penalty box
-Gatien is the current player
 They have rolled a 5
-Gatien is getting out of the penalty box
-Gatien's new location is 1
-The category is SCIENCE
-Science Question 0
-Answer was correct!!!!
-Gatien now has 4 Gold Coins.
-Gatien is the current player
-They have rolled a 1
-Gatien is getting out of the penalty box
-Gatien's new location is 4
+Gatien's new location is 0
 The category is POP
-Pop Question 2
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 5
-Gatien's new location is 6
-The category is SPORT
-Sports Question 0
+Pop Question 0
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -2497,32 +2687,32 @@ Science Question 1
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien's new location is 7
-The category is ROCK
-Rock Question 0
+They have rolled a 4
+Gatien's new location is 9
+The category is SCIENCE
+Science Question 2
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 2
-Gatien's new location is 3
-The category is ROCK
-Rock Question 1
+They have rolled a 1
+Gatien's new location is 2
+The category is SPORT
+Sports Question 0
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
 They have rolled a 5
-Gatien's new location is 0
-The category is POP
-Pop Question 0
+Gatien's new location is 2
+The category is SPORT
+Sports Question 1
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
 Gatien is the current player
-They have rolled a 4
-Gatien's new location is 7
-The category is ROCK
-Rock Question 2
+They have rolled a 3
+Gatien's new location is 5
+The category is SCIENCE
+Science Question 3
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -2538,39 +2728,31 @@ Techno Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 5
-Gatien's new location is 5
-The category is SCIENCE
-Science Question 0
+They have rolled a 2
+Gatien's new location is 2
+The category is SPORT
+Sports Question 0
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Gatien is the current player
-They have rolled a 5
-Gatien's new location is 8
-The category is POP
-Pop Question 0
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien's new location is 9
-The category is SCIENCE
-Science Question 1
+They have rolled a 3
+Gatien's new location is 6
+The category is SPORT
+Sports Question 1
 Answer was correct!!!!
 Gatien now has 3 Gold Coins.
 Gatien is the current player
 They have rolled a 1
-Gatien is getting out of the penalty box
-Gatien's new location is 9
-The category is SCIENCE
-Science Question 2
+Gatien's new location is 3
+The category is TECHNO
+Techno Question 1
 Answer was correct!!!!
-Gatien now has 2 Gold Coins.
+Gatien now has 3 Gold Coins.
 Gatien is the current player
-They have rolled a 5
-Gatien's new location is 2
-The category is SPORT
-Sports Question 0
+They have rolled a 1
+Gatien's new location is 7
+The category is TECHNO
+Techno Question 2
 Answer was correct!!!!
 Gatien now has 6 Gold Coins.
 Gatien win
@@ -2957,56 +3139,41 @@ They are player number 1
 Louis was added
 They are player number 2
 Gatien is the current player
-They have rolled a 5
-Gatien's new location is 5
+They have rolled a 1
+Gatien's new location is 1
 The category is SCIENCE
 Science Question 0
-Question was incorrectly answered
-Gatien was sent to the penalty box
-Louis is the current player
-They have rolled a 2
-Louis's new location is 2
-The category is SPORT
-Sports Question 0
-Question was incorrectly answered
-Louis was sent to the penalty box
-Gatien is the current player
-They have rolled a 4
-Gatien is not getting out of the penalty box
-Louis is the current player
-They have rolled a 1
-Louis is getting out of the penalty box
-Louis's new location is 3
-The category is ROCK
-Rock Question 0
-Answer was correct!!!!
-Louis now has 1 Gold Coins.
-Gatien is the current player
-They have rolled a 4
-Gatien is not getting out of the penalty box
-Louis is the current player
-They have rolled a 1
-Louis's new location is 4
-The category is POP
-Pop Question 0
-Answer was correct!!!!
-Louis now has 3 Gold Coins.
-Gatien is the current player
-They have rolled a 1
-Gatien is getting out of the penalty box
-Gatien's new location is 6
-The category is SPORT
-Sports Question 1
 Answer was correct!!!!
 Gatien now has 1 Gold Coins.
 Louis is the current player
-They have rolled a 2
-Louis's new location is 6
-The category is SPORT
-Sports Question 2
+They have rolled a 1
+Louis's new location is 1
+The category is SCIENCE
+Science Question 1
 Answer was correct!!!!
-Louis now has 6 Gold Coins.
-Louis win
+Louis now has 1 Gold Coins.
+Gatien is the current player
+They have rolled a 2
+Gatien's new location is 3
+The category is ROCK
+Rock Question 0
+Answer was correct!!!!
+Gatien now has 3 Gold Coins.
+Louis is the current player
+They have rolled a 2
+Louis's new location is 3
+The category is ROCK
+Rock Question 1
+Answer was correct!!!!
+Louis now has 3 Gold Coins.
+Gatien is the current player
+They have rolled a 5
+Gatien's new location is 8
+The category is POP
+Pop Question 0
+Answer was correct!!!!
+Gatien now has 6 Gold Coins.
+Gatien win
 Gatien was added
 They are player number 1
 Louis was added

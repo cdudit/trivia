@@ -30,6 +30,7 @@ class Game(
     private var philoQuestions = LinkedList<String>()
     private var litteratureQuestions = LinkedList<String>()
     private var geoQuestions = LinkedList<String>()
+    private var peopleQuestions = LinkedList<String>()
 
     private var currentPlayerIndex = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
@@ -41,7 +42,7 @@ class Game(
         get() = leaderboard.isComplete()
 
     enum class Category {
-        POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO
+        POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO, PEOPLE
     }
 
     init {
@@ -166,6 +167,7 @@ class Game(
         arrayList.add(Pair(Category.PHILO, philoQuestions.size))
         arrayList.add(Pair(Category.LITTERATURE, litteratureQuestions.size))
         arrayList.add(Pair(Category.GEO, geoQuestions.size))
+        arrayList.add(Pair(Category.PEOPLE, peopleQuestions.size))
 
         return arrayList
     }
@@ -226,6 +228,7 @@ class Game(
                     Category.PHILO -> console.println(philoQuestions.removeFirst().toString())
                     Category.LITTERATURE -> console.println(litteratureQuestions.removeFirst().toString())
                     Category.GEO -> console.println(geoQuestions.removeFirst().toString())
+                    Category.PEOPLE -> console.println(peopleQuestions.removeFirst().toString())
                 }
             } catch (exception: NoSuchElementException) {
                 fillQuestions()
@@ -257,11 +260,12 @@ class Game(
             return when (players[currentPlayerIndex].place) {
                 0 -> Category.POP
                 1 -> Category.SCIENCE
-                2, 10 -> Category.SPORT
+                2 -> Category.SPORT
                 3, 11 -> Category.RAP
                 4, 7 -> Category.GEO
                 8 -> Category.PHILO
                 9 -> Category.LITTERATURE
+                10 -> Category.PEOPLE
                 else -> if (shouldReplaceRockByTechno) Category.TECHNO else Category.ROCK
             }
         } else {
@@ -296,6 +300,7 @@ class Game(
                 philoQuestions.addLast("Philo Question $i")
                 litteratureQuestions.addLast("Litterature Question $i")
                 geoQuestions.addLast("Geo Question $i")
+                peopleQuestions.addLast("People Question $i")
             }
         }
         numberOfQuestions += 49
