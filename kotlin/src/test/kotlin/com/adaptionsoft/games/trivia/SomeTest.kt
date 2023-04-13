@@ -12,10 +12,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import java.time.Clock
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 import kotlin.random.Random
 
 class SomeTest {
@@ -189,7 +185,17 @@ class SomeTest {
     }
     //endregion
 
-    //TODO Feature 5
+    //region PLAYER LOOSING CHOOSE NEXT CATEGORY [FEATURE #5]
+    @Test
+    fun `player should choose next category when loosing`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien", nextCategoryWhenLoosing = Game.Category.GEO), Player(name = "Louis")))
+        }
+        GameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+        assert(console.getContent().contains("Question was incorrectly answeredGatien was sent to the penalty boxLouis is the current playerThey have rolled a 2Louis's new location is 2The category is GEO"))
+    }
+    //endregion
 
     //region MINIMAL GOLD REQUIRED [FEATURE #6]
     @Test

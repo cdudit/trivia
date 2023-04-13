@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia
 
+import kotlin.random.Random
+
 data class Player(
     val name: String,
     var purses: Int = 0,
@@ -8,5 +10,6 @@ data class Player(
     var timesGotInPrison: Int = 0,
     val doesNotWantToAnswer: Boolean = false,
     var hasJoker: Boolean = false,
-    var correctAnswerStrike: Int = 0
+    var correctAnswerStrike: Int = 0,
+    val nextCategoryWhenLoosing: Game.Category? = null
 )

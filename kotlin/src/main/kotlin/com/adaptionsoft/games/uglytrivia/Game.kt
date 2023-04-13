@@ -34,6 +34,7 @@ class Game(
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     private var numberOfQuestions = 0
+    private var currentCategory: Category? = null
 
     enum class Category {
         POP, SCIENCE, SPORT, ROCK, TECHNO, RAP, PHILO, LITTERATURE, GEO
@@ -187,6 +188,7 @@ class Game(
         }
         console.println("Question was incorrectly answered")
         console.println(players[currentPlayerIndex].name + " was sent to the penalty box")
+        currentCategory = players[currentPlayerIndex].nextCategoryWhenLoosing
         players[currentPlayerIndex].correctAnswerStrike = 0
         players[currentPlayerIndex].isInPenaltyBox = true
         players[currentPlayerIndex].timesGotInPrison++
@@ -233,6 +235,11 @@ class Game(
     }
 
     private fun currentCategory(): Category {
+        if (currentCategory != null) {
+            val toReturn = currentCategory!!
+            currentCategory = null
+            return toReturn
+        }
         if (shouldUseExpansionPack) {
             return when (players[currentPlayerIndex].place) {
                 0 -> Category.POP
