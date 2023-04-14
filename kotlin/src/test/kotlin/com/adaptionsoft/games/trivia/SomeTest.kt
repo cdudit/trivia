@@ -274,7 +274,33 @@ class SomeTest {
     }
     //endregion
 
-    //TODO Feature 9
+    //region EVERY TURN SPENT IN JAIL INCREASES CHANCES THAT PLAYER GOES OUT BY 10% [FEATURE #9]
+    @Test
+    fun `after each turn spent in jail, player should have 10 more percent to goes out`() {
+        val console = SpyConsole()
+        val game = Game(console).apply {
+            add(arrayListOf(Player(name = "Gatien"), Player(name = "Louis")))
+        }
+
+        // On force une partie où les joueurs restent en prison et ne font que des mauvaises réponses
+        gameRunner.runGame(game, shouldUseRandom = false, shouldGoInPrison = true, hasCorrectAnswered = false)
+
+        // On vérifie que Gatien a 10% de chance supplémentaire de quitter la prison
+        assert(console.getContent().contains("Gatien has 10% more chance to exit jail with 1 turn in jail"))
+        val afterFirstChanceToExitJail = console.getContent().split("Gatien has 10% more chance to exit jail with 1 turn in jail")[1]
+        assert(!afterFirstChanceToExitJail.contains("Gatien has 10% more chance to exit jail with 1 turn in jail"))
+
+        // Puis 20%
+        assert(afterFirstChanceToExitJail.contains("Gatien has 20% more chance to exit jail with 2 turn in jail"))
+        val afterSecondChanceToExitJail = console.getContent().split("Gatien has 20% more chance to exit jail with 2 turn in jail")[1]
+        assert(!afterSecondChanceToExitJail.contains("Gatien has 20% more chance to exit jail with 2 turn in jail"))
+
+        // Et enfin 30%
+        assert(afterFirstChanceToExitJail.contains("Gatien has 30% more chance to exit jail with 3 turn in jail"))
+        val afterThirdChanceToExitJail = console.getContent().split("Gatien has 30% more chance to exit jail with 3 turn in jail")[1]
+        assert(!afterThirdChanceToExitJail.contains("Gatien has 30% more chance to exit jail with 3 turn in jail"))
+    }
+    //endregion
 
     //region COULD REPLAY GAME [FEATURE #10]
     @Test

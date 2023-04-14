@@ -11,6 +11,7 @@ data class Player(
     val doesNotWantToAnswer: Boolean = false,
     var hasJoker: Boolean = false,
     var correctAnswerStrike: Int = 0,
+    var jailStrike: Int = 0,
     val nextCategoryWhenLoosing: Game.Category? = null,
     var hasWin: Boolean = false,
     var dateInJail: Date? = null

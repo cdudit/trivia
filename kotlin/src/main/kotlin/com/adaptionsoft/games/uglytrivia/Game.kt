@@ -40,9 +40,6 @@ class Game(
     val isLeaderboardComplete: Boolean
         get() = leaderboard.isComplete()
 
-    val currentPlayerTimesGotInJail: Int
-        get() = players[currentPlayerIndex].timesGotInPrison
-
     val currentPlayerIsInJail: Boolean
         get() = players[currentPlayerIndex].isInPenaltyBox
 
@@ -83,11 +80,17 @@ class Game(
         console.println("They have rolled a $roll")
 
         if (players[currentPlayerIndex].isInPenaltyBox) {
-            console.println("${players[currentPlayerIndex].name} has 1/$currentPlayerTimesGotInJail chance to exit jail")
+            val playerName = players[currentPlayerIndex].name
+            val jailStrike = players[currentPlayerIndex].jailStrike
+            val timesGotInJail = players[currentPlayerIndex].timesGotInPrison
+            console.println("$playerName has 1/$timesGotInJail chance to exit jail")
+            console.println("$playerName has ${jailStrike*10}% more chance to exit jail with $jailStrike turn in jail")
             if (roll == 1) {
                 players[currentPlayerIndex].isInPenaltyBox = false
+                players[currentPlayerIndex].jailStrike = 0
                 console.println("${players[currentPlayerIndex].name} is getting out of the penalty box")
             } else {
+                players[currentPlayerIndex].jailStrike++
                 console.println("${players[currentPlayerIndex].name} is not getting out of the penalty box")
             }
         } else {
@@ -152,6 +155,13 @@ class Game(
         return arrayList
     }
 
+    fun getChancesToExitJail(): Int {
+        val gotInJail = players[currentPlayerIndex].timesGotInPrison
+        val jailStrike = players[currentPlayerIndex].jailStrike
+        val shouldReturn = if (jailStrike == 0) gotInJail else gotInJail * (1 - (jailStrike / 10))
+        return if (shouldReturn <= 0) 1 else shouldReturn
+    }
+
     fun wrongAnswer() {
         try {
             // Check if player has been removed because doesn't want to answer
@@ -196,6 +206,10 @@ class Game(
         } else if (players[currentPlayerIndex].doesNotWantToAnswer) {
             console.println("${players[currentPlayerIndex].name} doesn't want to answer and left the game")
             players.removeAt(currentPlayerIndex)
+            if (players.size == 1) {
+                players[0].hasWin = true
+                leaderboard.addWinner()
+            }
         } else {
             try {
                 when (currentCategory()) {
@@ -218,7 +232,7 @@ class Game(
     }
 
     private fun incrementCurrentPlayerIndex() {
-        if (leaderboard.isComplete()) {
+        if (leaderboard.isComplete() || players.all { it.hasWin }) {
             return
         }
         currentPlayerIndex++
