@@ -132,11 +132,17 @@ class SomeTest {
 
     @Test
     fun `should replace rock by techno`() {
+        var counter = 0
         val console = SpyConsole()
         val game = Game(console, shouldReplaceRockByTechno = true).apply {
             add(arrayListOf(Player("Gatien"), Player("Gatien")))
         }
         gameRunner.runGame(game)
+        // On rejoue la partie car vu que l'on joue avec de l'aléatoire, il est possible que la catégorie ne soit pas jouée
+        while (counter < 5 && !console.getContent().contains("The category is TECHNO")) {
+            counter--
+            gameRunner.replay()
+        }
         assert(console.getContent().contains("The category is TECHNO"))
         assert(!console.getContent().contains("The category is ROCK"))
     }

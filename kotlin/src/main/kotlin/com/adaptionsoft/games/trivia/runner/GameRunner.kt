@@ -73,8 +73,8 @@ object GameRunner {
                 } else {
                     game.wasCorrectlyAnswered()
                 }
-                counter++
             }
+            counter++
         } while (!game.isLeaderboardComplete && counter < shouldStopAfterNumberOfQuestions)
     }
 }
